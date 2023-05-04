@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Upload and Comment</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$("#file-input").on("change", function() {
+				var file = this.files[0];
+				var reader = new FileReader();
+				reader.onload = function(e) {
+					$("#image-preview").attr("src", e.target.result);
+				}
+				reader.readAsDataURL(file);
+			});
+			$("#submit-comment").on("click", function() {
+				var comment = $("#comment-input").val();
+				if (comment) {
+					$("#comment-list").append("<li>" + comment + "</li>");
+					$("#comment-input").val("");
+				}
+			});
+		});
+	</script>
+</head>
+<body>
+	<h1>Upload and Comment</h1>
+	<form>
+		<label for="file-input">Choose a photo:</label>
+		<input type="file" id="file-input"><br><br>
+		<img id="image-preview" src="#" alt="Image preview"><br><br>
+		<label for="comment-input">Leave a comment:</label>
+		<input type="text" id="comment-input" name="comment-input"><br><br>
+		<input type="button" id="submit-comment" value="Submit Comment">
+	</form>
+	<ul id="comment-list"></ul>
+</body>
+</html>
