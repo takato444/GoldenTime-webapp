@@ -324,16 +324,16 @@
                 <div class="title_holder">
                     <div class="title">
                         <div class="input">
-                            <form>
+                            <form action="." method="POST">{% csrf_token %}
                                 <h3>帳號：
-                                <input type="text" placeholder="請輸入帳號" name="" required="">
+                                <input type="text" placeholder="請輸入帳號" name="username">
                                 </h3>
                                 <h3>密碼：
-                                    <input type="text" placeholder="請輸入密碼" name="" required="">
+                                    <input type="password" placeholder="請輸入密碼" name="password">
                                     </h3>
                                 <div class="read_more">
                                 <div class="read_in">
-                                    <input type="submit"  value="確定">
+                                    <input type="submit"  value="登入">
                                 </div>
                                 </div>     
                             </form>

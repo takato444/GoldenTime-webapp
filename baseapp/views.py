@@ -23,7 +23,7 @@ def into_sigin(request):
     return render(request,'sigin.html',locals())
 def logout(request):
     auth.logout(request)
-    return redirect('/index/')
+    return redirect('/')
 def login(request):
 	if request.method == 'POST':
 		name = request.POST['username']
@@ -32,8 +32,8 @@ def login(request):
 		if user is not None:
 			if user.is_active:
 				auth.login(request,user)
-				return redirect('/index/')
-				message = '登入成功！'
+				return redirect('/')
+				# message = '登入成功！'
 			else:
 				message = '帳號尚未啟用！'
 		else:
@@ -54,4 +54,16 @@ def addtestuser(request):
 		user.is_staff=True	# 工作人員狀態
 		user.save()
 		return redirect('/admin/')
+def sigin(request):
+    if request.method == 'POST':
+        fname = request.POST[fname]
+        lname = request.POST[lname]
+        password = request.POST[password]
+        username = request.POST[username]
+        email = request.POST[email]
+        user.first_name = fname
+        user.last_name = lname
+        user=User.objects.create_user(username,email,password)
+        user.save()
+    return render(request,'sigin.html',locals())
 # Create your views here.
