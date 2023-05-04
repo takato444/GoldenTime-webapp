@@ -1,6 +1,8 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate
-
+from django.http import HttpResponse
+from django.contrib import auth
+from django.contrib.auth.models import User
 def into_index(request):
     if request.user.is_authenticated:
     	   name=request.user.username
@@ -37,4 +39,19 @@ def login(request):
 		else:
 			message = '登入失敗！'
 	return render(request, "login.html", locals())
+def addtestuser(request):	
+	try:
+		user=User.objects.get(username="test")
+	except:
+		user=None
+	if user!=None:
+		message = user.username + " 帳號已建立!"
+		return HttpResponse(message)
+	else:	# 建立 test 帳號			
+		user=User.objects.create_user("test","test@test.com.tw","password")
+		user.first_name="takato" # 姓名
+		user.last_name="togakushi"  # 姓氏
+		user.is_staff=True	# 工作人員狀態
+		user.save()
+		return redirect('/admin/')
 # Create your views here.
