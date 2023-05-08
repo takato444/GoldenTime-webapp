@@ -55,15 +55,18 @@ def addtestuser(request):
 		user.save()
 		return redirect('/admin/')
 def sigin(request):
-    if request.method == 'POST':
-        fname = request.POST[fname]
-        lname = request.POST[lname]
-        password = request.POST[password]
-        username = request.POST[username]
-        email = request.POST[email]
-        user.first_name = fname
-        user.last_name = lname
-        user=User.objects.create_user(username,email,password)
-        user.save()
+    try:
+        if request.method == 'POST':
+            fname = request.POST[fname]
+            lname = request.POST[lname]
+            password = request.POST[password]
+            username = request.POST[username]
+            email = request.POST[email]
+            user.first_name = fname
+            user.last_name = lname
+            user=User.objects.create_user(username,email,password)
+            user.save()
+    except:
+        return redirect('/')
     return render(request,'sigin.html',locals())
 # Create your views here.
