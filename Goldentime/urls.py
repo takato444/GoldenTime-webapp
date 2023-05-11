@@ -32,7 +32,7 @@ urlpatterns = [
     path('into_login/',views.login),
     path('showdata/',views.showdata),
     path('addtestdata',views.addtestdata),
-    path('edit/<int:id>/', views.edit), # 由 瀏覽器 開啟
-	path('edit/<int:id>/<str:mode>', views.edit), # 由 edit.html 按 送出 鈕
-    path('delete/<int:id>/', views.delete),
+    path('edit/<str:id>/', views.edit), # 由 瀏覽器 開啟
+	path('edit/<str:id>/<str:mode>', views.edit), # 由 edit.html 按 送出 鈕
+    path('delete/<str:id>/', views.delete),
 ]
