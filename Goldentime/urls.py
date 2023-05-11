@@ -26,8 +26,13 @@ urlpatterns = [
     path('login/',views.login),
     path('search/<str:searchname>',views.search),
     path('mylove/',views.into_mylove),
-    path('mypost/',views.into_mypost),
+    path('myinfo/',views.myinfo),
     path('into_sigin/',views.sigin),
     path('logout/',views.logout),
     path('into_login/',views.login),
+    path('showdata/',views.showdata),
+    path('addtestdata',views.addtestdata),
+    path('edit/<int:id>/', views.edit), # 由 瀏覽器 開啟
+	path('edit/<int:id>/<str:mode>', views.edit), # 由 edit.html 按 送出 鈕
+    path('delete/<int:id>/', views.delete),
 ]
