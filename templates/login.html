@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>美食論壇</title>
+    <title>美食探勘家</title>
     <!--================= Favicon =================-->
     
     <!--================= Magnific Popup CSS =================-->
@@ -137,7 +137,7 @@
                         </ul>
                     </li>
                     <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-9">
-                        <a href="#">
+                        <a href="">
                             <span>
                             <span>我想發文</span>
                             <span class="suffix"></span>
@@ -145,7 +145,7 @@
                         </a>
                         <ul class="sub-menu">
                             <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-140">
-                                <a href="photo.html">
+                                <a href="/upload">
                                     <span>
                                     <span>選照片發文</span>
                                     <span class="suffix">//</span>
@@ -164,7 +164,7 @@
                         </a>
                         <ul class="sub-menu">
                             <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-140">
-                                <a href="">
+                                <a href="/mylove/">
                                     <span>
                                     <span>我的收藏</span>
                                     <span class="suffix">//</span>
@@ -172,7 +172,7 @@
                                 </a>
                             </li>
                             <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-141">
-                                <a href="">
+                                <a href="/mypost/">
                                     <span>
                                     <span>我的貼文</span>
                                     <span class="suffix">//</span>
@@ -190,7 +190,7 @@
                         </a>
                         <ul class="sub-menu">
                             <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-140">
-                                <a href="">
+                                <a href="/into_mypost/">
                                     <span>
                                     <span>會員管理</span>
                                     <span class="suffix">//</span>
@@ -198,12 +198,27 @@
                                 </a>
                             </li>
                             <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-141">
-                                <a href="#">
+                                {% if request.user.is_authenticated %}
+                                <a href="/logout/">
                                     <span>
                                     <span>登出</span>
                                     <span class="suffix">//</span>
                                     </span>
                                 </a>
+                                {% else %}
+                                <a href="/login/">
+                                    <span>
+                                    <span>登入</span>
+                                    <span class="suffix">//</span>
+                                    </span>
+                                </a>
+                                <a href="/into_sigin/">
+                                    <span>
+                                    <span>註冊</span>
+                                    <span class="suffix">//</span>
+                                    </span>
+                                </a>
+                                {% endif %}
                             </li>
                         </ul>
                     </li>
@@ -244,8 +259,6 @@
         <div class="xoxo_fn_header">
             <div class="container">
                 <div class="header_top">
-                    <span class="wing_left"></span>
-                    <span class="wing_right"></span>
                     <!-- Social List -->
                     <div class="social">
                         <div class="xoxo_fn_social_list">
@@ -318,32 +331,65 @@
                         </a>
                     </div>
                 </div>
-      <li class="post_item">
-        <div class="blog__item blog__item_classic">
-            <div class="bottom_holder">
-                <div class="title_holder">
-                    <div class="title">
-                        <div class="input">
-                            <form action="." method="POST">{% csrf_token %}
-                                <h3>帳號：
-                                <input type="text" placeholder="請輸入帳號" name="username">
-                                </h3>
-                                <h3>密碼：
-                                    <input type="password" placeholder="請輸入密碼" name="password">
-                                    </h3>
-                                <div class="read_more">
-                                <div class="read_in">
-                                    <input type="submit"  value="登入">
-                                </div>
-                                </div>     
-                            </form>
+                <div class="xoxo_fn_nosidebar">
+                    <div class="container blog_layout_classic_container">
+                        <div class="xoxo_fn_bloglist blog_layout_classic">
+                            <ul>
+                                <li class="post_item">
+                                    <div class="blog__item blog__item_classic">
+                                        <div class="bottom_holder">
+                                            <div class="title_holder">
+                                                <form class="main_form" action="#" method="POST">{% csrf_token %}
+                                                    <h2>美食探勘家</h2>
+                                                    <div class="input">
+                                                        <h3>帳號：
+                                                        <input type="text" placeholder="請輸入帳號" name="username">
+                                                        </h3>
+                                                        <h3>密碼：
+                                                        <input type="password" placeholder="請輸入密碼" name="password">
+                                                        </h3>
+                                                    </div>
+                                                    <div class="read_more">
+                                                        <div class="read_in">
+                                                            <span class="xoxo_submit"><input type="submit" value="登入"></span>
+                                                        </div>
+                                                    </div>
+                                                    <a href="/into_sigin/"><span class="text">點我開始註冊</span></a>
+                                                </form>     
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
+    <!--================= Sticky Menu End Here =================-->
+    <div class="xoxo_fn_searchbox">
+        <a href="#" class="search_closer"><span></span></a>
+        <div class="container">
+            <div class="search_content">
+                <div class="search_wrapper">
+                    <form class="main_form" action="#" method="get">
+                        <div class="input">
+                            <input type="text" placeholder="今天想來點什麼..." name="s" autocomplete="off">
+                        </div>
+                        <div class="search">
+                            <input type="submit" class="pe-7s-search" value="今天想點">
+                            <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="488.000000pt" height="488.000000pt" viewbox="0 0 488.000000 488.000000" preserveaspectratio="xMidYMid meet" class="fn__svg  replaced-svg">
+                                <g transform="translate(0.000000,488.000000) scale(0.100000,-0.100000)" stroke="none">
+                                    <path d="M2140 4874 c-165 -20 -218 -28 -303 -45 -263 -54 -570 -183 -792 -332 -179 -121 -378 -299 -510 -457 -271 -326 -444 -714 -511 -1150 -22 -142 -25 -488 -6 -630 92 -667 461 -1257 1019 -1631 538 -362 1205 -477 1842 -318 181 45 304 92 501 191 163 82 179 88 235 88 103 -1 126 -17 395 -284 216 -214 253 -246 310 -271 57 -26 77 -30 160 -30 86 0 101 3 162 32 89 42 151 101 191 182 30 62 32 72 32 176 0 104 -2 114 -33 180 -29 61 -60 96 -267 305 -258 259 -274 282 -275 385 0 56 6 72 88 235 99 197 146 320 191 501 174 699 17 1434 -427 1994 -78 98 -241 264 -347 353 -312 262 -725 447 -1137 508 -99 14 -446 27 -518 18z m476 -823 c401 -82 743 -312 970 -651 360 -540 333 -1254 -66 -1769 -306 -393 -781 -612 -1274 -587 -700 35 -1268 524 -1418 1220 -18 85 -22 133 -21 296 0 170 3 210 25 310 63 286 195 534 397 744 251 259 562 412 941 460 85 11 348 -3 446 -23z">
+                                    </path>
+                                </g>
+                            </svg>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-    </li>
-
+    </div>
+  
+      <!--================= Header Start Here =================-->
     <!--================= jquery lastest version =================-->
     <script src="/static/js/jquery.min.js"></script>
     <!--================= Isotop JS =================-->

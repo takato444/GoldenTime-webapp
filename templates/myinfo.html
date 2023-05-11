@@ -45,15 +45,15 @@
                                             </span>
                                         </a>
                                         <ul class="sub-menu">
-                                            <li class="menu-item"><a href=""><span><span>日本美食</span><span class="suffix">//</span></span></a></li>
-                                            <li class="menu-item"><a href=""><span><span>韓國美食</span><span class="suffix">//</span></span></a></li>
-                                            <li class="menu-item"><a href=""><span><span>台灣美食</span><span class="suffix">//</span></span></a></li>
-                                            <li class="menu-item"><a href=""><span><span>中式美食</span><span class="suffix">//</span></span></a></li>
-                                            <li class="menu-item"><a href=""><span><span>美式美食</span><span class="suffix">//</span></span></a></li>
-                                            <li class="menu-item"><a href=""><span><span>健康飲食</span><span class="suffix">//</span></span></a></li>
-                                            <li class="menu-item"><a href=""><span><span>港式美食</span><span class="suffix">//</span></span></a></li>
-                                            <li class="menu-item"><a href=""><span><span>異國美食</span><span class="suffix">//</span></span></a></li>
-                                            <li class="menu-item"><a href=""><span><span>甜點</span><span class="suffix">//</span></span></a></li>
+                                            <li class="menu-item"><a href="/search/日本美食"><span><span>日本美食</span><span class="suffix">//</span></span></a></li>
+                                            <li class="menu-item"><a href="/search/韓國美食"><span><span>韓國美食</span><span class="suffix">//</span></span></a></li>
+                                            <li class="menu-item"><a href="/search/台灣美食"><span><span>台灣美食</span><span class="suffix">//</span></span></a></li>
+                                            <li class="menu-item"><a href="/search/中式美食"><span><span>中式美食</span><span class="suffix">//</span></span></a></li>
+                                            <li class="menu-item"><a href="/search/美式美食"><span><span>美式美食</span><span class="suffix">//</span></span></a></li>
+                                            <li class="menu-item"><a href="/search/健康飲食"><span><span>健康飲食</span><span class="suffix">//</span></span></a></li>
+                                            <li class="menu-item"><a href="/search/港式美食"><span><span>港式美食</span><span class="suffix">//</span></span></a></li>
+                                            <li class="menu-item"><a href="/search/異國美食"><span><span>異國美食</span><span class="suffix">//</span></span></a></li>
+                                            <li class="menu-item"><a href="/search/甜點"><span><span>甜點</span><span class="suffix">//</span></span></a></li>
                                         </ul>
                                     </li>
                                     <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-117 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-130">
@@ -64,7 +64,7 @@
                                           </span>
                                       </a>
                                       <ul class="sub-menu">
-                                        <li class="menu-item"><a href="photo.html"><span><span>選照片發文</span><span class="suffix">//</span></span></a></li>
+                                        <li class="menu-item"><a href="/upload"><span><span>選照片發文</span><span class="suffix">//</span></span></a></li>
                                       </ul> 
                                     </li>
                                     <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-117 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-130">
@@ -75,9 +75,9 @@
                                             </span>
                                         </a>
                                         <ul class="sub-menu">
-                                          <li class="menu-item"><a href=""><span><span>我的收藏</span><span class="suffix">//</span></span></a></li>
-                                          <li class="menu-item"><a href=""><span><span>我的貼文</span><span class="suffix">//</span></span></a></li>
-                                        </ul>
+                                            <li class="menu-item"><a href="/mylove/"><span><span>我的收藏</span><span class="suffix">//</span></span></a></li>
+                                            <li class="menu-item"><a href="/mypost/"><span><span>我的貼文</span><span class="suffix">//</span></span></a></li>
+                                          </ul>
                                     </li>
                                     <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-117 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-130">
                                       <a href="#0">
@@ -87,8 +87,13 @@
                                           </span>
                                       </a>
                                       <ul class="sub-menu">
-                                        <li class="menu-item"><a href="/login/"><span><span>會員管理</span><span class="suffix">//</span></span></a></li>
-                                        <li class="menu-item"><a href="/login/"><span><span>登出</span><span class="suffix">//</span></span></a></li>
+                                        {% if request.user.is_authenticated %}
+                                        <li class="menu-item"><a href="/into_mypost/"><span><span>會員管理</span><span class="suffix">//</span></span></a></li>
+                                        <li class="menu-item"><a href="/logout/"><span><span>登出</span><span class="suffix">//</span></span></a></li>
+                                        {% else %}
+                                        <li class="menu-item"><a href="/login/"><span><span>登入</span><span class="suffix">//</span></span></a></li>
+                                        <li class="menu-item"><a href="/into_sigin/"><span><span>註冊</span><span class="suffix">//</span></span></a></li>
+                                        {% endif %}
                                       </ul>
                                   </li>
                                 </ul>
@@ -263,8 +268,8 @@
                     <!-- !Social List -->
                     <div class="logo">
                         <a href="/">
-                            <img class="retina_logo" src="static/picture/logo.png" alt="logo">
-                            <img class="desktop_logo" src="static/picture/logo.png" alt="logo">
+                            <img class="retina_logo" src="/static/picture/logo.png" alt="logo">
+                            <img class="desktop_logo" src="/static/picture/logo.png" alt="logo">
                         </a>
                     </div>
                     <div class="search_opener">
@@ -297,19 +302,19 @@
                                                 </span>
                                             </a>
                                             <ul class="sub-menu">
-                                                <li class="menu-item"><a href=""><span><span>日本美食</span><span class="suffix">//</span></span></a></li>
-                                                <li class="menu-item"><a href=""><span><span>韓國美食</span><span class="suffix">//</span></span></a></li>
-                                                <li class="menu-item"><a href=""><span><span>台灣美食</span><span class="suffix">//</span></span></a></li>
-                                                <li class="menu-item"><a href=""><span><span>中式美食</span><span class="suffix">//</span></span></a></li>
-                                                <li class="menu-item"><a href=""><span><span>美式美食</span><span class="suffix">//</span></span></a></li>
-                                                <li class="menu-item"><a href=""><span><span>健康飲食</span><span class="suffix">//</span></span></a></li>
-                                                <li class="menu-item"><a href=""><span><span>港式美食</span><span class="suffix">//</span></span></a></li>
-                                                <li class="menu-item"><a href=""><span><span>異國美食</span><span class="suffix">//</span></span></a></li>
-                                                <li class="menu-item"><a href=""><span><span>甜點</span><span class="suffix">//</span></span></a></li>
+                                                <li class="menu-item"><a href="/search/日本美食"><span><span>日本美食</span><span class="suffix">//</span></span></a></li>
+                                                <li class="menu-item"><a href="/search/韓國美食"><span><span>韓國美食</span><span class="suffix">//</span></span></a></li>
+                                                <li class="menu-item"><a href="/search/台灣美食"><span><span>台灣美食</span><span class="suffix">//</span></span></a></li>
+                                                <li class="menu-item"><a href="/search/中式美食"><span><span>中式美食</span><span class="suffix">//</span></span></a></li>
+                                                <li class="menu-item"><a href="/search/美式美食"><span><span>美式美食</span><span class="suffix">//</span></span></a></li>
+                                                <li class="menu-item"><a href="/search/健康飲食"><span><span>健康飲食</span><span class="suffix">//</span></span></a></li>
+                                                <li class="menu-item"><a href="/search/港式美食"><span><span>港式美食</span><span class="suffix">//</span></span></a></li>
+                                                <li class="menu-item"><a href="/search/異國美食"><span><span>異國美食</span><span class="suffix">//</span></span></a></li>
+                                                <li class="menu-item"><a href="/search/甜點"><span><span>甜點</span><span class="suffix">//</span></span></a></li>
                                             </ul>
                                         </li>
                                         <li class="menu-item menu-item-has-children">
-                                            <a href="/upload/">
+                                            <a href="#">
                                                 <span>
                                                 <span>我想發文</span>
                                                 <span class="suffix">//</span>
@@ -327,9 +332,9 @@
                                                 </span>
                                             </a>
                                             <ul class="sub-menu">
-                                              <li class="menu-item"><a href="/mylove/"><span><span>我的收藏</span><span class="suffix">//</span></span></a></li>
-                                              <li class="menu-item"><a href="/mypost/"><span><span>我的貼文</span><span class="suffix">//</span></span></a></li>
-                                            </ul>
+                                                <li class="menu-item"><a href="/mylove/"><span><span>我的收藏</span><span class="suffix">//</span></span></a></li>
+                                                <li class="menu-item"><a href="/mypost/"><span><span>我的貼文</span><span class="suffix">//</span></span></a></li>
+                                              </ul>
                                         </li>
                                         <li class="menu-item menu-item-has-children">
                                           <a href="#0">
@@ -340,12 +345,12 @@
                                           </a>
                                           <ul class="sub-menu">
                                             {% if request.user.is_authenticated %}
-                                                <li class="menu-item"><a href="/login/"><span><span>會員管理</span><span class="suffix">//</span></span></a></li>
-                                                <li class="menu-item"><a href="/logout/"><span><span>登出</span><span class="suffix">//</span></span></a></li>
+                                            <li class="menu-item"><a href="/into_mypost/"><span><span>會員管理</span><span class="suffix">//</span></span></a></li>
+                                            <li class="menu-item"><a href="/logout/"><span><span>登出</span><span class="suffix">//</span></span></a></li>
                                             {% else %}
-                                                <li class="menu-item"><a href="login/"><span><span>登入</span><span class="suffix">//</span></span></a></li>
+                                            <li class="menu-item"><a href="/login/"><span><span>登入</span><span class="suffix">//</span></span></a></li>
+                                            <li class="menu-item"><a href="/into_sigin/"><span><span>註冊</span><span class="suffix">//</span></span></a></li>
                                             {% endif %}
-                                            
                                           </ul>
                                       </li>
                                     </ul>
@@ -367,7 +372,7 @@
             <div class="logo">
                 <div class="fn_logo">
                     <a href="/">
-                        <img class="mobile_logo" src="static/picture/logo.png" alt="logo">
+                        <img class="mobile_logo" src="/static/picture/logo.png" alt="logo">
                     </a>
                 </div>
             </div>
@@ -471,7 +476,7 @@
                         </ul>
                     </li>
                     <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-9">
-                        <a href="/upload/">
+                        <a href="#">
                             <span>
                             <span>我想發文</span>
                             <span class="suffix"></span>
@@ -479,7 +484,7 @@
                         </a>
                         <ul class="sub-menu">
                             <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-140">
-                                <a href="/upload/">
+                                <a href="/upload">
                                     <span>
                                     <span>選照片發文</span>
                                     <span class="suffix">//</span>
@@ -498,7 +503,7 @@
                         </a>
                         <ul class="sub-menu">
                             <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-140">
-                                <a href="">
+                                <a href="/mylove/">
                                     <span>
                                     <span>我的收藏</span>
                                     <span class="suffix">//</span>
@@ -506,7 +511,7 @@
                                 </a>
                             </li>
                             <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-141">
-                                <a href="">
+                                <a href="/mypost/">
                                     <span>
                                     <span>我的貼文</span>
                                     <span class="suffix">//</span>
@@ -523,22 +528,27 @@
                             </span>
                         </a>
                         <ul class="sub-menu">
-                            <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-140">
-                                <a href="/login/">
-                                    <span>
-                                    <span>會員管理</span>
-                                    <span class="suffix">//</span>
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-141">
-                                <a href="">
-                                    <span>
-                                    <span>登出</span>
-                                    <span class="suffix">//</span>
-                                    </span>
-                                </a>
-                            </li>
+                            {% if request.user.is_authenticated %}
+                            <a href="/logout/">
+                                <span>
+                                <span>登出</span>
+                                <span class="suffix">//</span>
+                                </span>
+                            </a>
+                            {% else %}
+                            <a href="/login/">
+                                <span>
+                                <span>登入</span>
+                                <span class="suffix">//</span>
+                                </span>
+                            </a>
+                            <a href="/into_sigin/">
+                                <span>
+                                <span>註冊</span>
+                                <span class="suffix">//</span>
+                                </span>
+                            </a>
+                            {% endif %}
                         </ul>
                     </li>
                 </ul>
@@ -553,9 +563,32 @@
             <div class="xoxo_fn_sidebar">
                 <div class="widget_block clear widget_xoxo_custom_categories">
                     <div class="wid-title">
-                        <span class="text">我的收藏</span>
+                        <span class="text">關於我</span>
                         <span class="icon"></span>
                     </div>
+                <div class="xoxo_fn_widget_author">
+                    <div class="info_img" style="background-image: url(assets/images/blog/author.jpg);">
+                        <a class="full_link" href="#0"></a>
+                        <div class="abs_img"></div>
+                    </div>
+                    <div class="info_desc">
+                        <div class="author_top">
+                            <h3 class="fn_title">
+                                <a href="#0">{{name}}</a>
+                            </h3>
+                            <p class="fn_desc">
+                                個人簡介:{{data.info}}
+                                帳號:{{data.username}}
+                                姓名：{{data.fname}}
+                                生日:{{data.birthday}}
+                                性別:{{data.sex}}
+                                手機:{{data.phone}}
+                                email:{{data.email}}
+                                <!-- {% endfor %} -->
+                            </p>
+                        </div>
+                    </div>  
+                </div>
                 <div class="xoxo_fn_hassidebar">
                     <div class="xoxo_fn_rightsidebar">
                         <ul>
@@ -594,7 +627,12 @@
                                             <div class="title">
                                                 <h3><a href="">{{我是標題}}</a></h3>
                                             </div>
-                                            
+                                            </div>
+                                            <div class="desc">
+                                                <p>
+                                                {{我是內文}}
+                                                </p>
+                                            </div>
                                             <div class="read_more">
                                                 <div class="read_in">
                                                     <a href="quote-post.html"><span class="text">觀看更多</span><span class="triple"></span></a>
@@ -616,12 +654,6 @@
                            
     <!--================= Interior Section End =================-->
     <!--================= Home One Start =================-->
-    <div class="xoxo_fn_content">
-        
-    </div>
-    
-
-  
     <div class="frenify-cursor cursor-outer" data-default="yes" data-link="yes" data-slider="no" style="visibility: visible; transform: translate(1591px, 538px);"><span class="fn-cursor"></span></div>
     <div class="frenify-cursor cursor-inner" data-default="yes" data-link="yes" data-slider="no" style="visibility: visible; transform: translate(360px, 544px);"><span class="fn-cursor"><span class="fn-left"></span><span class="fn-right"></span></span></div>
     <div class="loader-wrapper">
