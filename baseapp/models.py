@@ -23,4 +23,3 @@ class mesg(models.Model):
     context =models.CharField(max_length = 255)
     username = models.ForeignKey(basedata,on_delete = models.CASCADE)
     food_no = models.ForeignKey(food, on_delete = models.CASCADE)
-# Create your models here.

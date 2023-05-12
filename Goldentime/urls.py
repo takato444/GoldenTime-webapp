@@ -21,7 +21,7 @@ urlpatterns = [
     path('addtestuser',views.addtestuser),
     path('/',views.into_index),
     path('',views.into_index),
-    path('index/',views.into_index),
+    path('index/',views.into_index),#測試用
     path('upload/',views.into_upload),
     path('login/',views.login),
     path('search/<str:searchname>',views.search),
@@ -35,4 +35,5 @@ urlpatterns = [
     path('edit/<str:id>/', views.edit), # 由 瀏覽器 開啟
 	path('edit/<str:id>/<str:mode>', views.edit), # 由 edit.html 按 送出 鈕
     path('delete/<str:id>/', views.delete),
+    
 ]

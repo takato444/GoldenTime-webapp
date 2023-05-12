@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.contrib import auth
 from django.contrib.auth.models import User
 from baseapp.models import basedata
+from .forms import foodform
 def admin(request):
 	return redirect('/admin/')
 def into_index(request):
@@ -13,7 +14,18 @@ def into_index(request):
 def into_sign(request):
     pass
 def into_upload(request):
-    return render(request,'photo.html',locals())
+	if request.method =='POST':
+		form = foodform(request.POST,request.files)
+		if form.is_valid():
+			form.save()
+		return redirct('/')
+	else:
+		form = foodform()
+		context = {
+            'form': form
+        }
+	# return render(request.'photo.html',locals())
+	return render(request,'photo.html',locals())
 def comment(request):
     pass
 def search(request,searchname):
@@ -123,6 +135,7 @@ def sigin(request):
 		if request.method == 'POST':
 			fname = request.POST['fname']
 			lname = request.POST['lname']
+			sex = request.POST['sex']
 			password = request.POST['password']
 			username = request.POST['username']
 			email = request.POST['email']
@@ -132,10 +145,11 @@ def sigin(request):
 			user.last_name=lname
 			user.is_staff=False
 			user.save()
+			unit = basedata.objects.create(username=username,fname=fname,lname=lname, sex=sex, birthday=birthday,email=email,phone=phone, info=info) 
+			unit.save()  #寫入資料庫
 			return redirect('/')
 	except:
-		message = "註冊失敗"
+		message = "帳號已經存在"
 		return redirect('/')
 	return render(request,'sigin.html',locals())
-
 # Create your views here.
