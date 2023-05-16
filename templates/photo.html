@@ -40,7 +40,7 @@
     <!--================= Swiper CSS =================-->
     <link rel="stylesheet" href="/static/css/swiper.css">
     <!--================= Style CSS =================-->
-    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="/static/css/style.css">
 </head>
 
 <body>
@@ -318,9 +318,9 @@
                     </div>
                     <!-- !Social List -->
                     <div class="logo">
-                        <a href="main.html">
-                            <img class="retina_logo" src="static/picture/logo.png" alt="logo">
-                            <img class="desktop_logo" src="static/picture/logo.png" alt="logo">
+                        <a href="/">
+                            <img class="retina_logo" src="/static/picture/logo.png" alt="logo">
+                            <img class="desktop_logo" src="/static/picture/logo.png" alt="logo">
                         </a>
                     </div>
                     <div class="search_opener">
@@ -337,16 +337,40 @@
                         </a>
                     </div>
                 </div>
-                <form action="." enctype="multipart/form-data" method="post">
-                    <label for="file-input">選擇你要上傳的美食：</label>
-                    <input type="file" id="file-input"><br><br>
-                    <label for="comment-input">標題：</label>
-                    <input type="text" id="comment-input" name="comment-input"><br><br>
-                    <img id="image-preview" src="#" alt="Image preview"><br><br>
-                    <label for="comment-input">你的感想：</label>
-                    <input type="text" id="comment-input" name="comment-input"><br><br>
-                    <input type="button" id="submit-comment" value="確定分享">
-                </form>
+                <div class="xoxo_fn_nosidebar">
+                    <div class="container blog_layout_classic_container">
+                        <div class="xoxo_fn_bloglist blog_layout_classic">
+                            <ul>
+                                <li class="post_item">
+                                    <div class="blog__item blog__item_classic">
+                                        <div class="bottom_holder">
+                                            <div class="title_holder">
+                                                <form action="#" method="post" class="comment-form">
+                                                    <h2>Hi！美食探勘家</h2><br>
+                                                    <h4>選擇你要上傳的美食：</h4>
+                                                    <input type="file" id="file-input">
+                                                    <img id="image-preview" src="#" alt="Image preview"><br><br>
+                                                    <div class="input-holder">
+                                                        <textarea placeholder="想一個美味的標題吧！" name="comment" aria-required="true" rows="1" tabindex="1"></textarea>
+                                                        <br>
+                                                        <textarea placeholder="留下你的心得吧！" name="comment" aria-required="true" rows="10" tabindex="1"></textarea>
+                                                    </div>
+                                                    <br>
+                                                    <div class="input-holder">
+                                                        <span class="xoxo_submit">
+                                                            <input name="submit" type="submit" class="submit" value="分享">
+                                                        </span>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
 
     <!--================= jquery lastest version =================-->
     <script src="/static/js/jquery.min.js"></script>
@@ -364,3 +388,4 @@
 </body>
 
 </html>
+

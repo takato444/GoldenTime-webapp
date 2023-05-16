@@ -87,8 +87,13 @@
                                           </span>
                                       </a>
                                       <ul class="sub-menu">
-                                        <li class="menu-item"><a href="/login/"><span><span>會員管理</span><span class="suffix">//</span></span></a></li>
-                                        <li class="menu-item"><a href="/login/"><span><span>登出</span><span class="suffix">//</span></span></a></li>
+                                        {% if request.user.is_authenticated %}
+                                        <li class="menu-item"><a href="/into_mypost/"><span><span>會員管理</span><span class="suffix">//</span></span></a></li>
+                                        <li class="menu-item"><a href="/logout/"><span><span>登出</span><span class="suffix">//</span></span></a></li>
+                                        {% else %}
+                                        <li class="menu-item"><a href="/login/"><span><span>登入</span><span class="suffix">//</span></span></a></li>
+                                        <li class="menu-item"><a href="/into_sigin/"><span><span>註冊</span><span class="suffix">//</span></span></a></li>
+                                        {% endif %}
                                       </ul>
                                   </li>
                                 </ul>
@@ -263,8 +268,8 @@
                     <!-- !Social List -->
                     <div class="logo">
                         <a href="/">
-                            <img class="retina_logo" src="static/picture/logo.png" alt="logo">
-                            <img class="desktop_logo" src="static/picture/logo.png" alt="logo">
+                            <img class="retina_logo" src="/static/picture/logo.png" alt="logo">
+                            <img class="desktop_logo" src="/static/picture/logo.png" alt="logo">
                         </a>
                     </div>
                     <div class="search_opener">
@@ -340,12 +345,12 @@
                                           </a>
                                           <ul class="sub-menu">
                                             {% if request.user.is_authenticated %}
-                                                <li class="menu-item"><a href="/login/"><span><span>會員管理</span><span class="suffix">//</span></span></a></li>
-                                                <li class="menu-item"><a href="/logout/"><span><span>登出</span><span class="suffix">//</span></span></a></li>
+                                            <li class="menu-item"><a href="/into_mypost/"><span><span>會員管理</span><span class="suffix">//</span></span></a></li>
+                                            <li class="menu-item"><a href="/logout/"><span><span>登出</span><span class="suffix">//</span></span></a></li>
                                             {% else %}
-                                                <li class="menu-item"><a href="login/"><span><span>登入</span><span class="suffix">//</span></span></a></li>
+                                            <li class="menu-item"><a href="/login/"><span><span>登入</span><span class="suffix">//</span></span></a></li>
+                                            <li class="menu-item"><a href="/into_sigin/"><span><span>註冊</span><span class="suffix">//</span></span></a></li>
                                             {% endif %}
-                                            
                                           </ul>
                                       </li>
                                     </ul>
@@ -523,22 +528,41 @@
                             </span>
                         </a>
                         <ul class="sub-menu">
+                            {% if request.user.is_authenticated %}
                             <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-140">
-                                <a href="/login/">
+                                <a href="/into_mypost/">
                                     <span>
                                     <span>會員管理</span>
                                     <span class="suffix">//</span>
                                     </span>
                                 </a>
                             </li>
-                            <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-141">
-                                <a href="">
+                            <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-140">
+                                <a href="/logout/">
                                     <span>
                                     <span>登出</span>
                                     <span class="suffix">//</span>
                                     </span>
                                 </a>
                             </li>
+                            {% else %}
+                            <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-141">
+                                <a href="/login/">
+                                    <span>
+                                    <span>登入</span>
+                                    <span class="suffix">//</span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-141">
+                                <a href="/into_sigin/">
+                                    <span>
+                                    <span>註冊</span>
+                                    <span class="suffix">//</span>
+                                    </span>
+                                </a>
+                            </li>
+                            {% endif %}
                         </ul>
                     </li>
                 </ul>
