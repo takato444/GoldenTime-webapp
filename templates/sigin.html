@@ -22,6 +22,21 @@
     <link rel="stylesheet" href="/static/css/swiper.css">
     <!--================= Style CSS =================-->
     <link rel="stylesheet" href="/static/css/style.css">
+
+    <!--================= 註冊 =================-->
+    <script>
+        function validatePassword() {
+            var password = document.getElementById("password").value;
+            var confirmPassword = document.getElementById("password2").value;
+
+            if (password != confirmPassword) {
+                alert("兩次輸入的密碼不一致！");
+                return false;
+            }
+            
+            return true;
+        }
+    </script>
 </head>
 
 <body>
@@ -339,34 +354,34 @@
                 <div class="title_holder">
                     <div class="title">
                         <div class="input">
-                            <form action="." method="POST">{% csrf_token %}
+                            <form action="." method="POST" onsubmit="return validatePassword()">{% csrf_token %}
                                 <div class="input">
                                     <h3>&emsp;&emsp;帳號：
-                                    <input type="text" placeholder="請輸入帳號" name="username">
+                                    <input type="text" placeholder="請輸入帳號" name="username" required>
                                     </h3>
                                     <h3>電子郵件：
-                                        <input type="text" placeholder="請輸入電子郵件" name="email">
+                                        <input type="text" placeholder="請輸入電子郵件" name="email" required>
                                     </h3>
                                     <h3>電話：&ensp; 
-                                        <input type="text" placeholder="請輸入您的生日" name="Telephone">
+                                        <input type="text" placeholder="請輸入您的生日" name="Telephone" required>
                                     </h3>
                                     <h3>姓氏：
-                                        <input type="text" placeholder="姓氏" name="lname">
+                                        <input type="text" placeholder="請輸入您的姓氏" name="lname" required>
                                     </h3>
                                     <h3>名字：
-                                        <input type="text" placeholder="名字" name="fname">
+                                        <input type="text" placeholder="請輸入您的名字" name="fname" required>
                                     </h3>
                                     <h3>生日：&ensp; 
-                                        <input type="date" placeholder="請輸入您的生日" name="birthday">
+                                        <input type="date" placeholder="請輸入您的生日" name="birthday" required>
                                     </h3>
                                     <h3>性別：&ensp; 
-                                        <input type="text" placeholder="性別" name="gender">
+                                        <input type="text" placeholder="請輸入您的性別" name="gender" required>
                                     </h3>
                                     <h3>密碼：
-                                        <input type="password" placeholder="請輸入密碼" name="password">
+                                        <input type="password" placeholder="請輸入密碼" name="password" required>
                                     </h3>
                                     <h3>確認密碼：
-                                        <input type="password" placeholder="請再輸入一次密碼" name="password2">
+                                        <input type="password" placeholder="請再輸入一次密碼" name="password2" required>
                                     </h3>
                                     <h3>簡介：</h3>
                                     <div class="input-holder">

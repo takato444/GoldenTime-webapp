@@ -22,6 +22,37 @@
     <link rel="stylesheet" href="/static/css/swiper.css">
     <!--================= Style CSS =================-->
     <link rel="stylesheet" href="/static/css/style.css">
+     
+     <!--================= 資料驗證 =================-->
+    <script>
+        function validateForm() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+
+            if (username.trim() === "") {
+                alert("請輸入帳號");
+                return false;
+            }
+
+            if (password.trim() === "") {
+                alert("請輸入密碼");
+                return false;
+            }
+
+            var specialChars = /[!@#$%^&*(),.?":{}|<>]/;
+            if (specialChars.test(username)) {
+                alert("帳號不能包含特殊字符");
+                return false;
+            }
+
+            if (specialChars.test(password)) {
+                alert("密碼不能包含特殊字符");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
 </head>
 
 <body>
@@ -343,10 +374,10 @@
                                                     <h2>美食探勘家</h2>
                                                     <div class="input">
                                                         <h3>帳號：
-                                                        <input type="text" placeholder="請輸入帳號" name="username">
+                                                        <input type="text" placeholder="請輸入帳號" name="username" required> 
                                                         </h3>
                                                         <h3>密碼：
-                                                        <input type="password" placeholder="請輸入密碼" name="password">
+                                                        <input type="password" placeholder="請輸入密碼" name="password" required>
                                                         </h3>
                                                     </div>
                                                     <div class="read_more">
