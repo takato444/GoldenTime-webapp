@@ -3,8 +3,8 @@ from django.contrib.auth import authenticate
 from django.http import HttpResponse
 from django.contrib import auth
 from django.contrib.auth.models import User
-from baseapp.models import basedata
-from .forms import foodform
+from baseapp.models import basedata,food,mesg,love
+# from .forms import foodform
 def admin(request):
 	return redirect('/admin/')
 def into_index(request):
@@ -14,24 +14,49 @@ def into_index(request):
 def into_sign(request):
     pass
 def into_upload(request):
-	if request.method =='POST':
-		form = foodform(request.POST,request.files)
-		if form.is_valid():
-			form.save()
-		return redirct('/')
+	if request.user.is_authenticated:
+	# return render(request,'photo.html',locals())
+		if request.method =='POST':
+			context = request.POST['context']
+			food_name = request.POST['fdname']
+			# username = request.user.username
+			username = basedata.objects.get(username=request.user.username)
+			# username=request.user.username
+			adr = request.POST['adr']
+			unit = food.objects.create(food_name=food_name,username=username,adr=adr,context=context)
+			_,food_img = request.FILES.popitem()
+			food_img = food_img[0]
+			unit.food_img = food_img 
+			unit.save()
+			return redirect('/into_mypost/')
+		return render(request,'photo.html',locals())
 	else:
-		form = foodform()
-		context = {
-            'form': form
-        }
-	# return render(request.'photo.html',locals())
-	return render(request,'photo.html',locals())
+		return redirect('/login/')
 def comment(request):
     pass
-def search(request,searchname):
-    pass
+def search(request,searchname=None):
+	unit = food.objects.filter(food_name=searchname)
+	return render(request,'quote-post.html',locals())
 def into_mylove(request):
-    return render(request,'mylove.html',locals())
+	if request.user.is_authenticated:
+		username = request.user.username
+		data = love.objects.filter(username__exact=username)
+		# data_list = list(data)
+		# sex = data_list
+		# birthday = data.birthday
+		# info = data.info
+		# phone = data.phone
+		return render(request,'mylove.html',locals())
+	else:
+		return redirect('/login/')
+def into_mypost(request):
+	if request.user.is_authenticated:
+		username = request.user.username
+		data = food.objects.filter(username__exact=username)
+		return render(request,'mypost.html',locals())
+	# return render(request,'photo.html',locals())
+	else:
+		return redirect('/login/')
 def myinfo(request):
 	if request.user.is_authenticated:
 		username = request.user.username
@@ -43,7 +68,7 @@ def myinfo(request):
 		# phone = data.phone
 		return render(request,'myinfo.html',locals())
 	else:
-		return redirect('login/')
+		return redirect('/login/')
 def into_sigin(request):
     return render(request,'sigin.html',locals())
 def logout(request):
@@ -77,7 +102,7 @@ def addtestdata(request):
 	unit.save()  #寫入資料庫
 	return redirect('/showdata/')
 def showdata(request):
-	data = basedata.objects.all().order_by('id')
+	data = basedata.objects.all().order_by('username')
 	return render(request,'showdata.html',locals())
 def delete(request,id=None):  #刪除資料
 	if id!=None:
@@ -131,25 +156,27 @@ def addtestuser(request):
 		user.save()
 		return redirect('/admin/')
 def sigin(request):
-	try:
-		if request.method == 'POST':
-			fname = request.POST['fname']
-			lname = request.POST['lname']
-			sex = request.POST['sex']
-			password = request.POST['password']
-			username = request.POST['username']
-			email = request.POST['email']
-			birthday = request.POST['birthday']
-			user = User.objects.create_user(username,email,password)
-			user.first_name=fname
-			user.last_name=lname
-			user.is_staff=False
-			user.save()
-			unit = basedata.objects.create(username=username,fname=fname,lname=lname, sex=sex, birthday=birthday,email=email,phone=phone, info=info) 
-			unit.save()  #寫入資料庫
-			return redirect('/')
-	except:
-		message = "帳號已經存在"
+	if request.method == 'POST':
+		fname = request.POST['fname']
+		lname = request.POST['lname']
+		sex = request.POST['sex']
+		phone = request.POST['phone']
+		info =request.POST['info']
+		password = request.POST['password']
+		username = request.POST['username']
+		email = request.POST['email']
+		birthday = request.POST['birthday']
+		user = User.objects.create_user(username,email,password)
+		user.first_name=fname
+		user.last_name=lname
+		user.is_staff=False
+		user.save()
+		unit = basedata.objects.create(username=username,fname=fname,lname=lname, sex=sex, birthday=birthday,email=email,phone=phone, info=info) 
+		unit.save()  #寫入資料庫
 		return redirect('/')
+	# message = "帳號已經存在"
+	# return HttpResponse("error")
 	return render(request,'sigin.html',locals())
+def quote_post(request):
+	return render(request,'quote-post.html',locals())
 # Create your views here.

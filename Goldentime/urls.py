@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from baseapp import views
+from django.conf import settings
+from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('addtestuser',views.addtestuser),
@@ -24,6 +26,7 @@ urlpatterns = [
     path('index/',views.into_index),#測試用
     path('upload/',views.into_upload),
     path('login/',views.login),
+    path('mypost/',views.into_mypost),
     path('search/<str:searchname>',views.search),
     path('mylove/',views.into_mylove),
     path('myinfo/',views.myinfo),
@@ -35,5 +38,6 @@ urlpatterns = [
     path('edit/<str:id>/', views.edit), # 由 瀏覽器 開啟
 	path('edit/<str:id>/<str:mode>', views.edit), # 由 edit.html 按 送出 鈕
     path('delete/<str:id>/', views.delete),
-    
-]
+    path('quote_post/',views.quote_post),
+
+]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

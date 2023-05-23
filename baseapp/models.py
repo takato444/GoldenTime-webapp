@@ -16,10 +16,17 @@ class food(models.Model):
     food_no = models.AutoField(primary_key=True,null= False)
     food_name = models.CharField(max_length=100, null = False)
     food_img = models.ImageField(upload_to='image/', blank=False, null=False)
-    username=models.ForeignKey(basedata,on_delete=models.CASCADE)
+    context = models.CharField(max_length=225,default="沒有內文喔！")
+    adr = models.CharField(max_length=225,default=" ")
+    username=models.ForeignKey("basedata",on_delete=models.CASCADE)
+    tag = models.CharField(max_length=20,null=False,default="0")
     upload_date = models.DateField(default=timezone.now)
 class mesg(models.Model):
     mes_no = models.AutoField(primary_key = True)
     context =models.CharField(max_length = 255)
     username = models.ForeignKey(basedata,on_delete = models.CASCADE)
     food_no = models.ForeignKey(food, on_delete = models.CASCADE)
+class love(models.Model):
+    love_no = models.AutoField(primary_key=True,null=False)
+    username = models.ForeignKey("basedata",on_delete=models.CASCADE)
+    mes_no = models.ForeignKey("food",on_delete=models.CASCADE)

@@ -611,13 +611,15 @@
                                 <a href="#0">{{name}}</a>
                             </h3>
                             <p class="fn_desc">
-                                個人簡介:{{data.info}}
-                                帳號:{{data.username}}
-                                姓名：{{data.fname}}
-                                生日:{{data.birthday}}
-                                性別:{{data.sex}}
-                                手機:{{data.phone}}
-                                email:{{data.email}}
+                                {% for data in data %}
+                                個人簡介:{{data.info}}<br>
+                                帳號:{{data.username}}<br>
+                                姓名：{{data.fname}}<br>
+                                生日:{{data.birthday}}<br>
+                                性別:{{data.sex}}<br>
+                                手機:{{data.phone}}<br>
+                                email:{{data.email}}<br>
+                                {%endfor%}
                             </p>
                         </div>
                     </div>  

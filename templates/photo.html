@@ -361,18 +361,19 @@
                                     <div class="blog__item blog__item_classic">
                                         <div class="bottom_holder">
                                             <div class="title_holder">
-                                                <form action="#" method="post" class="comment-form">
+                                                <form action="." method="post" class="comment-form" enctype="multipart/form-data">
+                                                    {% csrf_token %}
                                                     <h2>Hi！美食探勘家</h2><br>
                                                     <h4>選擇你要上傳的美食：</h4>
-                                                    <input type="file" id="file-input">
+                                                    <input type="file" id="file-input" name="fdimg" accept=".jpg, .jpeg, .png">
                                                     <img id="image-preview" src="#" alt="Image preview"><br><br>
                                                     <div class="input-holder">
-                                                        <textarea placeholder="想一個美味的標題吧！" name="comment" aria-required="true" rows="1" tabindex="1"></textarea>
+                                                        <textarea placeholder="想一個美味的標題吧！" name="fdname" aria-required="true" rows="1" tabindex="1"></textarea>
                                                         <br>
-                                                        <textarea placeholder="留下你的心得吧！" name="comment" aria-required="true" rows="10" tabindex="1"></textarea>
+                                                        <textarea placeholder="留下你的心得吧！" name="context" aria-required="true" rows="10" tabindex="1"></textarea>
                                                     </div>
                                                     <br>
-                                                    <textarea placeholder="這間美食店在哪？輸入地址分享給大家吧～" name="comment" aria-required="true" rows="1" tabindex="1"></textarea>
+                                                    <textarea placeholder="這間美食店在哪？輸入地址分享給大家吧～" name="adr" aria-required="true" rows="1" tabindex="1"></textarea>
                                                     <br>
                                                     <div class="input-holder">
                                                         <span class="xoxo_submit">
