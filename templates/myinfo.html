@@ -22,6 +22,54 @@
     <link rel="stylesheet" href="/static/css/swiper.css">
     <!--================= Style CSS =================-->
     <link rel="stylesheet" href="/static/css/style.css">
+    <script>
+        function enableEditMode() {
+          // 取得個人資料
+          var datainfo = document.getElementById('datainfo');
+          var username = document.getElementById('username');
+          var fname = document.getElementById('fname');
+          var birthday = document.getElementById('birthday');
+          var sex = document.getElementById('sex');
+          var phone = document.getElementById('phone');
+          var email = document.getElementById('email');
+          
+          // 啟用編輯模式
+          datainfo.contentEditable = true;
+          username.contentEditable = true;
+          fname.contentEditable = true;
+          birthday.contentEditable = true;
+          sex.contentEditable = true;
+          phone.contentEditable = true;
+          email.contentEditable = true;
+          
+          datainfo.style.border = '1px solid red';
+          username.style.border = '1px solid red';
+          fname.style.border = '1px solid red';
+          birthday.style.border = '1px solid red';
+          sex.style.border = '1px solid red';
+          phone.style.border = '1px solid red';
+          email.style.border = '1px solid red';
+        }
+        function saveChanges() {
+          // 取得修改後的資料
+          var datainfo = document.getElementById('{{data.info}}').innerText;
+          var username = document.getElementById('{{data.username}}').innerText;
+          var fname = document.getElementById('{{data.fname}}').innerText;
+          var birthday = document.getElementById('{{data.birthday}}').innerText;
+          var sex = document.getElementById('{{data.sex}}').innerText;
+          var phone = document.getElementById('{{data.phone}}').innerText;
+          var email = document.getElementById('{{data.email}}').innerText;
+          
+          console.log('新的個人簡介：', datainfo);
+          console.log('新的帳號：', username);
+          console.log('新的姓名：', fname);
+          console.log('新的生日：', birthday);
+          console.log('新的性別：', sex);
+          console.log('新的手機：', phone);
+          console.log('新的email：', email);
+          
+        }
+      </script>
 </head>
 
 <body>
@@ -595,40 +643,51 @@
     <div class="xoxo_fn_hassidebar">
         <div class="sidebar_in">
             <div class="xoxo_fn_sidebar">
+                <div class="xoxo_fn_nosidebar">
+        <div class="container blog_layout_classic_container">
+            <div class="xoxo_fn_bloglist blog_layout_classic">
                 <div class="widget_block clear widget_xoxo_custom_categories">
                     <div class="wid-title">
                         <span class="text">關於我</span>
                         <span class="icon"></span>
                     </div>
-                <div class="xoxo_fn_widget_author">
-                    <div class="info_img" style="background-image: url(/static/image/拉麵.jpeg);">
-                        <a class="full_link" href="#0"></a>
-                        <div class="abs_img"></div>
-                    </div>
-                    <div class="info_desc">
-                        <div class="author_top">
-                            <h3 class="fn_title">
-                                <a href="#0">{{name}}</a>
-                            </h3>
-                            <p class="fn_desc">
-                                {% for data in data %}
-                                個人簡介:{{data.info}}<br>
-                                帳號:{{data.username}}<br>
-                                姓名：{{data.fname}}<br>
-                                生日:{{data.birthday}}<br>
-                                性別:{{data.sex}}<br>
-                                手機:{{data.phone}}<br>
-                                email:{{data.email}}<br>
-                                {%endfor%}
-                            </p>
+                    <ul>
+                        <div class="xoxo_fn_widget_author">
+                            <div class="info_img" style="background-image: url(/static/image/拉麵.jpeg);">
+                                <a class="full_link" href="#0"></a>
+                                <div class="abs_img"></div>
+                            </div>
+                            <div class="info_desc">
+                                <div class="author_top">
+                                    <h3 class="fn_title">
+                                        <a href="#0">{{name}}</a>
+                                    </h3>
+                                    <p class="fn_desc">
+                                        {% for data in data %}
+                                        個人簡介:<div id="datainfo">{{data.info}}</div><br>
+                                        帳號:<div id="username">{{data.username}}</div><br>
+                                        姓名：<div id="fname">{{data.fname}}</div><br>
+                                        生日:<div id="birthday">{{data.birthday}}</div><br>
+                                        性別:<div id="sex">{{data.sex}}</div><br>
+                                        手機:<div id="phone">{{data.phone}}</div><br>
+                                        email:<div id="email">{{data.email}}</div><br>
+                                        {%endfor%}
+                                    </p>
+                                </div>
+                                <span class="xoxo_submit"><input type="submit" value="編輯" onclick="enableEditMode()"></span>
+                                </br>
+                                <span class="xoxo_submit"><input type="submit" value="儲存" onclick="saveChanges()"></span>
+                            </div>  
                         </div>
-                    </div>  
+                    </ul>
                 </div>
-                
             </div>
         </div>
     </div>
-
+            </div>
+        </div>
+    </div>
+    
     
                                               
                            
