@@ -77,8 +77,8 @@
                                             </span>
                                         </a>
                                         <ul class="sub-menu">
-                                          <li class="menu-item"><a href="/mylove/"><span><span>我的收藏</span><span class="suffix">//</span></span></a></li>
-                                          <li class="menu-item"><a href="//"/><span><span>我的貼文</span><span class="suffix">//</span></span></a></li>
+                                          <li class="menu-item"><a href=""><span><span>我的收藏</span><span class="suffix">//</span></span></a></li>
+                                          <li class="menu-item"><a href=""><span><span>我的貼文</span><span class="suffix">//</span></span></a></li>
                                         </ul>
                                     </li>
                                     <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-117 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-130">
@@ -89,8 +89,13 @@
                                           </span>
                                       </a>
                                       <ul class="sub-menu">
+                                        {% if request.user.is_authenticated %}
                                         <li class="menu-item"><a href="/myinfo/"><span><span>會員管理</span><span class="suffix">//</span></span></a></li>
                                         <li class="menu-item"><a href="/logout/"><span><span>登出</span><span class="suffix">//</span></span></a></li>
+                                        {% else %}
+                                        <li class="menu-item"><a href="/login/"><span><span>登入</span><span class="suffix">//</span></span></a></li>
+                                        <li class="menu-item"><a href="/into_sigin/"><span><span>註冊</span><span class="suffix">//</span></span></a></li>
+                                        {% endif %}
                                       </ul>
                                   </li>
                                 </ul>
@@ -190,25 +195,25 @@
                           <input id="search-input" type="text" placeholder="今天想來點什麼..." name="s" autocomplete="off">
                       </div>
                       <div class="search">
-                          <input type="submit" class="pe-7s-search" value="今天想點">
-                          <a href="/search/" class="pe-7s-search"></a>
+                        <input type="submit" class="pe-7s-search" value="今天想點">
+                        <a href="/search/" class="pe-7s-search"></a>
 
-                            <script>
-                            document.querySelector(".pe-7s-search").addEventListener("click", function(event) {
-                                event.preventDefault();  // 防止點擊連結的預設行為
-                                var searchQuery = "";  // 填入你的搜尋關鍵字
-                                window.location.href = "/search/" + encodeURIComponent(searchQuery);
-                            });
-                            </script>
+                          <script>
+                          document.querySelector(".pe-7s-search").addEventListener("click", function(event) {
+                              event.preventDefault();  // 防止點擊連結的預設行為
+                              var searchQuery = "";  // 填入你的搜尋關鍵字
+                              window.location.href = "/search/" + encodeURIComponent(searchQuery);
+                          });
+                          </script>
 
-                            
-                          <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="488.000000pt" height="488.000000pt" viewbox="0 0 488.000000 488.000000" preserveaspectratio="xMidYMid meet" class="fn__svg  replaced-svg">
-                              <g transform="translate(0.000000,488.000000) scale(0.100000,-0.100000)" stroke="none">
-                                  <path d="M2140 4874 c-165 -20 -218 -28 -303 -45 -263 -54 -570 -183 -792 -332 -179 -121 -378 -299 -510 -457 -271 -326 -444 -714 -511 -1150 -22 -142 -25 -488 -6 -630 92 -667 461 -1257 1019 -1631 538 -362 1205 -477 1842 -318 181 45 304 92 501 191 163 82 179 88 235 88 103 -1 126 -17 395 -284 216 -214 253 -246 310 -271 57 -26 77 -30 160 -30 86 0 101 3 162 32 89 42 151 101 191 182 30 62 32 72 32 176 0 104 -2 114 -33 180 -29 61 -60 96 -267 305 -258 259 -274 282 -275 385 0 56 6 72 88 235 99 197 146 320 191 501 174 699 17 1434 -427 1994 -78 98 -241 264 -347 353 -312 262 -725 447 -1137 508 -99 14 -446 27 -518 18z m476 -823 c401 -82 743 -312 970 -651 360 -540 333 -1254 -66 -1769 -306 -393 -781 -612 -1274 -587 -700 35 -1268 524 -1418 1220 -18 85 -22 133 -21 296 0 170 3 210 25 310 63 286 195 534 397 744 251 259 562 412 941 460 85 11 348 -3 446 -23z">
-                                  </path>
-                              </g>
-                          </svg>
-                      </div>
+                          
+                        <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="488.000000pt" height="488.000000pt" viewbox="0 0 488.000000 488.000000" preserveaspectratio="xMidYMid meet" class="fn__svg  replaced-svg">
+                            <g transform="translate(0.000000,488.000000) scale(0.100000,-0.100000)" stroke="none">
+                                <path d="M2140 4874 c-165 -20 -218 -28 -303 -45 -263 -54 -570 -183 -792 -332 -179 -121 -378 -299 -510 -457 -271 -326 -444 -714 -511 -1150 -22 -142 -25 -488 -6 -630 92 -667 461 -1257 1019 -1631 538 -362 1205 -477 1842 -318 181 45 304 92 501 191 163 82 179 88 235 88 103 -1 126 -17 395 -284 216 -214 253 -246 310 -271 57 -26 77 -30 160 -30 86 0 101 3 162 32 89 42 151 101 191 182 30 62 32 72 32 176 0 104 -2 114 -33 180 -29 61 -60 96 -267 305 -258 259 -274 282 -275 385 0 56 6 72 88 235 99 197 146 320 191 501 174 699 17 1434 -427 1994 -78 98 -241 264 -347 353 -312 262 -725 447 -1137 508 -99 14 -446 27 -518 18z m476 -823 c401 -82 743 -312 970 -651 360 -540 333 -1254 -66 -1769 -306 -393 -781 -612 -1274 -587 -700 35 -1268 524 -1418 1220 -18 85 -22 133 -21 296 0 170 3 210 25 310 63 286 195 534 397 744 251 259 562 412 941 460 85 11 348 -3 446 -23z">
+                                </path>
+                            </g>
+                        </svg>
+                    </div>
                   </form>
                   <!-- <div id="search-results"></div> -->
               </div>
@@ -344,7 +349,7 @@
                                             </a>
                                             <ul class="sub-menu">
                                               <li class="menu-item"><a href="/mylove/"><span><span>我的收藏</span><span class="suffix">//</span></span></a></li>
-                                              <li class="menu-item"><a href=""><span><span>我的貼文</span><span class="suffix">//</span></span></a></li>
+                                              <li class="menu-item"><a href="/mypost/"><span><span>我的貼文</span><span class="suffix">//</span></span></a></li>
                                             </ul>
                                         </li>
                                         <li class="menu-item menu-item-has-children">
@@ -356,12 +361,12 @@
                                           </a>
                                           <ul class="sub-menu">
                                             {% if request.user.is_authenticated %}
-                                                <li class="menu-item"><a href="/myinfo/"><span><span>會員管理</span><span class="suffix">//</span></span></a></li>
-                                                <li class="menu-item"><a href="/logout/"><span><span>登出</span><span class="suffix">//</span></span></a></li>
+                                            <li class="menu-item"><a href="/myinfo/"><span><span>會員管理</span><span class="suffix">//</span></span></a></li>
+                                            <li class="menu-item"><a href="/logout/"><span><span>登出</span><span class="suffix">//</span></span></a></li>
                                             {% else %}
-                                                <li class="menu-item"><a href="login/"><span><span>登入</span><span class="suffix">//</span></span></a></li>
+                                            <li class="menu-item"><a href="/login/"><span><span>登入</span><span class="suffix">//</span></span></a></li>
+                                            <li class="menu-item"><a href="/into_sigin/"><span><span>註冊</span><span class="suffix">//</span></span></a></li>
                                             {% endif %}
-                                            
                                           </ul>
                                       </li>
                                     </ul>
@@ -383,7 +388,7 @@
             <div class="logo">
                 <div class="fn_logo">
                     <a href="/">
-                        <img class="mobile_logo" src="/static/picture/logo.png" alt="logo">
+                        <img class="mobile_logo" src="static/picture/logo.png" alt="logo">
                     </a>
                 </div>
             </div>
@@ -555,6 +560,7 @@
                             </span>
                         </a>
                         <ul class="sub-menu">
+                            {% if request.user.is_authenticated %}
                             <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-140">
                                 <a href="/myinfo/">
                                     <span>
@@ -563,7 +569,7 @@
                                     </span>
                                 </a>
                             </li>
-                            <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-141">
+                            <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-140">
                                 <a href="/logout/">
                                     <span>
                                     <span>登出</span>
@@ -571,6 +577,24 @@
                                     </span>
                                 </a>
                             </li>
+                            {% else %}
+                            <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-141">
+                                <a href="/login/">
+                                    <span>
+                                    <span>登入</span>
+                                    <span class="suffix">//</span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-141">
+                                <a href="/into_sigin/">
+                                    <span>
+                                    <span>註冊</span>
+                                    <span class="suffix">//</span>
+                                    </span>
+                                </a>
+                            </li>
+                            {% endif %}
                         </ul>
                     </li>
                 </ul>
@@ -585,7 +609,7 @@
             <div class="xoxo_fn_sidebar">
                 <div class="widget_block clear widget_xoxo_custom_categories">
                     <div class="wid-title">
-                        <span class="text">我的貼文</span>
+                        <span class="text">尋找美食</span>
                         <span class="icon"></span>
                     </div>
                 <div class="xoxo_fn_hassidebar">
@@ -602,7 +626,6 @@
                                             </g>
                                         </svg>
                                     </span>
-                                    {% for data in data%}
                                     <div class="fn__meta">
                                         <p>
                                             <span class="meta_item meta_date">
@@ -612,20 +635,20 @@
                                                         <path d="M0 1802 c0 -1179 2 -1376 15 -1425 47 -182 180 -315 362 -362 50 -13 309 -15 1973 -15 2099 0 1966 -4 2089 58 73 36 163 128 201 202 63 125 60 41 60 1542 l0 1368 -2350 0 -2350 0 0 -1368z m1390 483 l0 -305 -305 0 -305 0 0 298 c0 164 3 302 7 305 3 4 141 7 305 7 l298 0 0 -305z m1260 0 l0 -305 -300 0 -300 0 0 305 0 305 300 0 300 0 0 -305z m1268 -2 l2 -303 -305 0 -305 0 0 305 0 305 303 -2 302 -3 3 -302z m-2528 -1273 l0 -300 -305 0 -305 0 0 300 0 300 305 0 305 0 0 -300z m1260 0 l0 -300 -300 0 -300 0 0 300 0 300 300 0 300 0 0 -300z m1270 0 l0 -300 -305 0 -305 0 0 300 0 300 305 0 305 0 0 -300z"></path>
                                                     </g>
                                                 </svg>
-                                                {{data.upload_date}}
+                                                2023/05/15
                                             </span>
                                             <span class="meta_item meta_category">
-                                                <a class=" fn_last_category" href="">{{data.tag}}</a>
+                                                <a class=" fn_last_category" href="">拉麵</a>
                                             </span>
                                         </p>
                                     </div>
                                     <div class="bottom_holder">
                                         <div class="blog__image">
-                                            <a href=""><img src="/media/{{data.food_img}}" alt="Post Image"></a>
+                                            <a href=""><img src="/static/image/拉麵.jpeg" alt="Post Image"></a>
                                         </div>
                                         <div class="title_holder">
                                             <div class="title">
-                                                <h3><a href="">{{data.food_name}}</a></h3>
+                                                <h3><a href="">台北最好吃拉麵</a></h3>
                                             </div>
                                             
                                             <div class="read_more">
@@ -635,7 +658,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    {%endfor%}
                                 </div>
                             </li>
                         </ul>       
@@ -643,18 +665,19 @@
                 </div>
             </div>
         </div>
- 
-                                <!--{{data.food_name}}<br>
-                                <img src="/media/{{data.food_img}}"><br>
-                                {{data.food_img}}<br>
-                                {{data.tag}}
-                                {{data.upload_date}}<br>-->
-                                
+    </div>
+
     
                                               
                            
     <!--================= Interior Section End =================-->
     <!--================= Home One Start =================-->
+    <div class="xoxo_fn_content">
+        
+    </div>
+    
+
+  
     <div class="frenify-cursor cursor-outer" data-default="yes" data-link="yes" data-slider="no" style="visibility: visible; transform: translate(1591px, 538px);"><span class="fn-cursor"></span></div>
     <div class="frenify-cursor cursor-inner" data-default="yes" data-link="yes" data-slider="no" style="visibility: visible; transform: translate(360px, 544px);"><span class="fn-cursor"><span class="fn-left"></span><span class="fn-right"></span></span></div>
     <div class="loader-wrapper">
@@ -688,8 +711,6 @@
     <script src="/static/js/swiper.js"></script>
     <!--================= Main JS =================-->
     <script src="/static/js/main.js"></script>
-    <!--================= Search JS =================-->
-    <script src="/static/js/search.js"></script>
     <!--================= Script End Here =================-->
 </body>
 
