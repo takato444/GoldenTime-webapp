@@ -615,6 +615,7 @@
                                             </g>
                                         </svg>
                                     </span>
+                                    {% for data in data%}
                                     <div class="fn__meta">
                                         <p>
                                             <span class="meta_item meta_date">
@@ -624,29 +625,30 @@
                                                         <path d="M0 1802 c0 -1179 2 -1376 15 -1425 47 -182 180 -315 362 -362 50 -13 309 -15 1973 -15 2099 0 1966 -4 2089 58 73 36 163 128 201 202 63 125 60 41 60 1542 l0 1368 -2350 0 -2350 0 0 -1368z m1390 483 l0 -305 -305 0 -305 0 0 298 c0 164 3 302 7 305 3 4 141 7 305 7 l298 0 0 -305z m1260 0 l0 -305 -300 0 -300 0 0 305 0 305 300 0 300 0 0 -305z m1268 -2 l2 -303 -305 0 -305 0 0 305 0 305 303 -2 302 -3 3 -302z m-2528 -1273 l0 -300 -305 0 -305 0 0 300 0 300 305 0 305 0 0 -300z m1260 0 l0 -300 -300 0 -300 0 0 300 0 300 300 0 300 0 0 -300z m1270 0 l0 -300 -305 0 -305 0 0 300 0 300 305 0 305 0 0 -300z"></path>
                                                     </g>
                                                 </svg>
-                                                2023/05/15
+                                                {{data.upload_date}}
                                             </span>
                                             <span class="meta_item meta_category">
-                                                <a class=" fn_last_category" href="">拉麵</a>
+                                                <a class=" fn_last_category" href="">{{data.tag}}</a>
                                             </span>
                                         </p>
                                     </div>
                                     <div class="bottom_holder">
                                         <div class="blog__image">
-                                            <a href=""><img src="/static/image/拉麵.jpeg" alt="Post Image"></a>
+                                            <a href=""><img src="/media/{{data.food_img}}" alt="Post Image"></a>
                                         </div>
                                         <div class="title_holder">
                                             <div class="title">
-                                                <h3><a href="">台北最好吃拉麵</a></h3>
+                                                <h3><a href="">{{data.food_name}}</a></h3>
                                             </div>
                                             
                                             <div class="read_more">
                                                 <div class="read_in">
-                                                    <a href="/quote_post/"><span class="text">觀看更多</span><span class="triple"></span></a>
+                                                    <a href="/quote_post/{{food_no}}"><span class="text">觀看更多</span><span class="triple"></span></a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                    {%endfor%}
                                 </div>
                             </li>
                         </ul>       

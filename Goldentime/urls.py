@@ -39,5 +39,5 @@ urlpatterns = [
 	path('edit/<str:id>/<str:mode>', views.edit), # 由 edit.html 按 送出 鈕
     path('delete/<str:id>/', views.delete),
     path('quote_post/',views.quote_post),
-
+    path('search/',views.into_search),
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

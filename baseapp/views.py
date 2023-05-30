@@ -36,11 +36,14 @@ def comment(request):
     pass
 def search(request,searchname=None):
 	unit = food.objects.filter(food_name=searchname)
-	return render(request,'quote-post.html',locals())
+	return render(request,'search.html',locals())
+def into_search(request):
+	data = food.objects.all().order_by('food_no')
+	return render(request,'search.html',locals())
 def into_mylove(request):
 	if request.user.is_authenticated:
 		username = request.user.username
-		data = love.objects.filter(username__exact=username)
+		data = food.objects.filter(love__username__exact=username)
 		# data_list = list(data)
 		# sex = data_list
 		# birthday = data.birthday
