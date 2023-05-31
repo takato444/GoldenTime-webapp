@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
-
+  <!--================= cmd＋f 個人資料 更改圖片內文=================-->
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -694,55 +694,58 @@
         </div>
     </div>
     <!--================= Mobile Menu Start Here =================-->
-    <!--================= Interior Section Start =================-->
+    <!--================= 個人資料 更改圖片內文=================-->
    
     <div class="xoxo_fn_hassidebar">
         <div class="sidebar_in">
             <div class="xoxo_fn_sidebar">
                 <div class="xoxo_fn_nosidebar">
-        <div class="container blog_layout_classic_container">
-            <div class="xoxo_fn_bloglist blog_layout_classic">
-                <div class="widget_block clear widget_xoxo_custom_categories">
-                    <div class="wid-title">
-                        <span class="text">關於我</span>
-                        <span class="icon"></span>
-                    </div>
-                    <ul>{% for data in data %}
-                        <div class="xoxo_fn_widget_author">
-                            <div class="info_img" id="photo" style="background-image: url({{data.photo}});">
-                                <div class="abs_img"></div>
-                            </div>
-                            <div class="info_desc">
-                                <div class="author_top">
-                                    <h3 class="fn_title">
-                                        <a href="#0">{{name}}</a>
-                                    </h3>
-                                    <p class="fn_desc">
-                                        <div id=""></div>
-                                        個人簡介：<div id="datainfo">{{data.info}}</div><br>
-                                        帳號：<div id="username">{{data.username}}</div><br>
-                                        姓名：<div id="fname">{{data.fname}}</div><br>
-                                        生日：<div id="birthday">{{data.birthday}}</div><br>
-                                        性別：<div id="sex">{{data.sex}}</div><br>
-                                        手機：<div id="phone">{{data.phone}}</div><br>
-                                        email：<div id="email">{{data.email}}</div><br>
-                                        {%endfor%}
-                                    </p>
+                    <div class="container blog_layout_classic_container">
+                        <div class="xoxo_fn_bloglist blog_layout_classic">
+                            <div class="widget_block clear widget_xoxo_custom_categories">
+                                <div class="wid-title">
+                                    <span class="text">關於我</span>
+                                    <span class="icon"></span>
                                 </div>
-                                <form id="profile-form" style="display: none;">
-                                    更換頭像：<input type="file" id="photo-input"><br><br>
-                                    <span class="xoxo_submit"><input type="submit" value="儲存" ></span>
-                                </form>
-                                <br>
-                                <span class="xoxo_submit"><input type="submit" value="編輯" onclick="enableEditMode()"></span>
-                               
-                            </div>  
+                                <ul>{% for data in data %}
+                                    <div class="xoxo_fn_widget_author">
+                                        <!--================= cmd＋f 更改圖片=================-->
+                                        <div class="info_img" id="photo" style="background-image: url({{data.photo}});">
+                                            <div class="abs_img"></div>
+                                        </div>
+                                        <div class="info_desc">
+                                            <div class="author_top">
+                                                <h3 class="fn_title">
+                                                    <a href="#0">{{name}}</a>
+                                                </h3>
+                                                <p class="fn_desc">
+                                                    <div id=""></div>
+                                                    <!--================= cmd＋f 內文=================-->
+                                                    個人簡介：<div id="datainfo">{{data.info}}</div><br>
+                                                    帳號：<div id="username">{{data.username}}</div><br>
+                                                    姓名：<div id="fname">{{data.fname}}</div><br>
+                                                    生日：<div id="birthday">{{data.birthday}}</div><br>
+                                                    性別：<div id="sex">{{data.sex}}</div><br>
+                                                    手機：<div id="phone">{{data.phone}}</div><br>
+                                                    email：<div id="email">{{data.email}}</div><br>
+                                                    {%endfor%}
+                                                </p>
+                                            </div>
+                                            <form id="profile-form" style="display: none;">
+                                                <!--================= cmd＋f上傳照片=================-->
+                                                更換頭像：<input type="file" id="photo-input"><br><br>
+                                                <span class="xoxo_submit"><input type="submit" value="儲存" ></span>
+                                            </form>
+                                            <br>
+                                            <span class="xoxo_submit"><input type="submit" value="編輯" onclick="enableEditMode()"></span>
+                                        
+                                        </div>  
+                                    </div>
+                                </ul>
+                            </div>
                         </div>
-                    </ul>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
             </div>
         </div>
     </div>
