@@ -32,7 +32,7 @@
           var sex = document.getElementById('sex');
           var phone = document.getElementById('phone');
           var email = document.getElementById('email');
-          
+    
           // 啟用編輯模式
           datainfo.contentEditable = true;
           username.contentEditable = true;
@@ -41,7 +41,7 @@
           sex.contentEditable = true;
           phone.contentEditable = true;
           email.contentEditable = true;
-          
+    
           datainfo.style.border = '1px solid red';
           username.style.border = '1px solid red';
           fname.style.border = '1px solid red';
@@ -49,17 +49,23 @@
           sex.style.border = '1px solid red';
           phone.style.border = '1px solid red';
           email.style.border = '1px solid red';
+    
+          document.getElementById('photo').style.display = 'none';
+          document.getElementById('profile-form').style.display = 'block';
         }
-        function saveChanges() {
+    
+        function saveChanges(event) {
+          event.preventDefault(); // 防止表單提交
+    
           // 取得修改後的資料
-          var datainfo = document.getElementById('{{data.info}}').innerText;
-          var username = document.getElementById('{{data.username}}').innerText;
-          var fname = document.getElementById('{{data.fname}}').innerText;
-          var birthday = document.getElementById('{{data.birthday}}').innerText;
-          var sex = document.getElementById('{{data.sex}}').innerText;
-          var phone = document.getElementById('{{data.phone}}').innerText;
-          var email = document.getElementById('{{data.email}}').innerText;
-          
+          var datainfo = document.getElementById('datainfo').innerText;
+          var username = document.getElementById('username').innerText;
+          var fname = document.getElementById('fname').innerText;
+          var birthday = document.getElementById('birthday').innerText;
+          var sex = document.getElementById('sex').innerText;
+          var phone = document.getElementById('phone').innerText;
+          var email = document.getElementById('email').innerText;
+    
           console.log('新的個人簡介：', datainfo);
           console.log('新的帳號：', username);
           console.log('新的姓名：', fname);
@@ -67,9 +73,47 @@
           console.log('新的性別：', sex);
           console.log('新的手機：', phone);
           console.log('新的email：', email);
-          
+    
+          // 處理頭像更改
+          var photoInput = document.getElementById('photo-input');
+          var selectedPhoto = photoInput.files[0];
+    
+          if (selectedPhoto) {
+            var reader = new FileReader();
+            reader.onload = function(event) {
+              document.getElementById('photo').src = event.target.result;
+              document.getElementById('photo').style.display = 'block';
+              document.getElementById('profile-form').style.display = 'none';
+            };
+            reader.readAsDataURL(selectedPhoto);
+          }
+    
+          // 更新修改後的資料到對應的元素
+          document.getElementById('datainfo').innerText = datainfo;
+          document.getElementById('username').innerText = username;
+          document.getElementById('fname').innerText = fname;
+          document.getElementById('birthday').innerText = birthday;
+          document.getElementById('sex').innerText = sex;
+          document.getElementById('phone').innerText = phone;
+          document.getElementById('email').innerText = email;
+    
+          // 取消編輯模式並隱藏紅色的編輯框
+          var dataElements = document.querySelectorAll('#datainfo, #username, #fname, #birthday, #sex, #phone, #email');
+          dataElements.forEach(function(element) {
+            element.contentEditable = false;
+            element.style.border = 'none';
+          });
+    
+          // 清空表單的選取項目
+          document.getElementById('photo-input').value = '';
+    
+          // 顯示儲存成功訊息或重新載入頁面
+          alert('資料已儲存！');
+          window.location.reload(); 
         }
-      </script>
+    
+        document.getElementById('profile-form').addEventListener('submit', saveChanges);
+    </script>
 </head>
 
 <body>
@@ -663,10 +707,9 @@
                         <span class="text">關於我</span>
                         <span class="icon"></span>
                     </div>
-                    <ul>
+                    <ul>{% for data in data %}
                         <div class="xoxo_fn_widget_author">
-                            <div class="info_img" style="background-image: url(/static/image/拉麵.jpeg);">
-                                <a class="full_link" href="#0"></a>
+                            <div class="info_img" id="photo" style="background-image: url({{data.photo}});">
                                 <div class="abs_img"></div>
                             </div>
                             <div class="info_desc">
@@ -675,20 +718,24 @@
                                         <a href="#0">{{name}}</a>
                                     </h3>
                                     <p class="fn_desc">
-                                        {% for data in data %}
-                                        個人簡介:<div id="datainfo">{{data.info}}</div><br>
-                                        帳號:<div id="username">{{data.username}}</div><br>
+                                        <div id=""></div>
+                                        個人簡介：<div id="datainfo">{{data.info}}</div><br>
+                                        帳號：<div id="username">{{data.username}}</div><br>
                                         姓名：<div id="fname">{{data.fname}}</div><br>
-                                        生日:<div id="birthday">{{data.birthday}}</div><br>
-                                        性別:<div id="sex">{{data.sex}}</div><br>
-                                        手機:<div id="phone">{{data.phone}}</div><br>
-                                        email:<div id="email">{{data.email}}</div><br>
+                                        生日：<div id="birthday">{{data.birthday}}</div><br>
+                                        性別：<div id="sex">{{data.sex}}</div><br>
+                                        手機：<div id="phone">{{data.phone}}</div><br>
+                                        email：<div id="email">{{data.email}}</div><br>
                                         {%endfor%}
                                     </p>
                                 </div>
+                                <form id="profile-form" style="display: none;">
+                                    更換頭像：<input type="file" id="photo-input"><br><br>
+                                    <span class="xoxo_submit"><input type="submit" value="儲存" ></span>
+                                </form>
+                                <br>
                                 <span class="xoxo_submit"><input type="submit" value="編輯" onclick="enableEditMode()"></span>
-                                </br>
-                                <span class="xoxo_submit"><input type="submit" value="儲存" onclick="saveChanges()"></span>
+                               
                             </div>  
                         </div>
                     </ul>
