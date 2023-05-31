@@ -1,21 +1,138 @@
-<div class="title_holder">
-    <h3>
-        <a href="">{{首頁熱門輪播標題}}</a>
-    </h3>
-    <div class="fn__meta">
-        <p>
-            <span class="meta_item meta_date">
-                <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="470.000000pt" height="470.000000pt" viewbox="0 0 470.000000 470.000000" preserveaspectratio="xMidYMid meet" class="fn__svg  replaced-svg">
-                    <g transform="translate(0.000000,470.000000) scale(0.100000,-0.100000)" stroke="none">
-                        <path d="M1224 4666 l-34 -34 0 -210 0 -211 -412 -3 -413 -3 -75 -36 c-136 -65 -236 -182 -272 -318 -13 -51 -17 -110 -17 -253 l-1 -188 2350 0 2350 0 0 181 c0 211 -14 288 -66 376 -54 90 -118 149 -213 196 l-84 42 -414 3 -413 3 0 211 0 210 -34 34 -34 34 -146 0 -146 0 -32 -29 -33 -29 -3 -216 -3 -216 -730 0 -729 0 0 195 c0 293 -2 295 -218 295 l-144 0 -34 -34z"></path>
-                        <path d="M0 1802 c0 -1179 2 -1376 15 -1425 47 -182 180 -315 362 -362 50 -13 309 -15 1973 -15 2099 0 1966 -4 2089 58 73 36 163 128 201 202 63 125 60 41 60 1542 l0 1368 -2350 0 -2350 0 0 -1368z m1390 483 l0 -305 -305 0 -305 0 0 298 c0 164 3 302 7 305 3 4 141 7 305 7 l298 0 0 -305z m1260 0 l0 -305 -300 0 -300 0 0 305 0 305 300 0 300 0 0 -305z m1268 -2 l2 -303 -305 0 -305 0 0 305 0 305 303 -2 302 -3 3 -302z m-2528 -1273 l0 -300 -305 0 -305 0 0 300 0 300 305 0 305 0 0 -300z m1260 0 l0 -300 -300 0 -300 0 0 300 0 300 300 0 300 0 0 -300z m1270 0 l0 -300 -305 0 -305 0 0 300 0 300 305 0 305 0 0 -300z"></path>
-                    </g>
-                </svg>
-                {{日期}} 
-            </span>
-            <span class="meta_item meta_category">
-                <a class="fn_last_category" href="">{{我是分類}}</a>
-            </span>
-        </p>
-    </div>
-</div>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>個人資料</title>
+  <style>
+    .profile-image {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    {% for data in data %}
+    <h1>個人資料</h1>
+    <img id="photo" src="{{data.photo}}">
+    個人簡介:<div id="datainfo">{{data.info}}</div><br>
+    帳號:<div id="username">{{data.username}}</div><br>
+    姓名：<div id="fname">{{data.fname}}</div><br>
+    生日:<div id="birthday">{{data.birthday}}</div><br>
+    性別:<div id="sex">{{data.sex}}</div><br>
+    手機:<div id="phone">{{data.phone}}</div><br>
+    email:<div id="email">{{data.email}}</div><br>
+    {%endfor%}
+    <input id="photo-input" type="submit" value="編輯" onclick="enableEditMode()">
+    <form id="profile-form" style="display: none;">
+      <input type="file" id="image-input">
+      <input type="submit" value="儲存" onclick="saveChanges()">
+    </form>
+  </div>
+
+  <!DOCTYPE html>
+<html>
+<head>
+  <title>個人資料</title>
+  <style>
+    .profile-image {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    {% for data in data %}
+    <h1>個人資料</h1>
+    <img id="photo" src="{{data.photo}}">
+    個人簡介:<div id="datainfo">{{data.info}}</div><br>
+    帳號:<div id="username">{{data.username}}</div><br>
+    姓名：<div id="fname">{{data.fname}}</div><br>
+    生日:<div id="birthday">{{data.birthday}}</div><br>
+    性別:<div id="sex">{{data.sex}}</div><br>
+    手機:<div id="phone">{{data.phone}}</div><br>
+    email:<div id="email">{{data.email}}</div><br>
+    {%endfor%}
+    <button onclick="enableEditMode()">編輯</button>
+    <form id="photo-form" style="display: none;">
+      <input type="file" id="photo-input">
+      <input type="submit" value="儲存" onclick="saveChanges()">
+    </form>
+  </div>
+
+  <script>
+    function enableEditMode() {
+        // 取得個人資料
+        var datainfo = document.getElementById('datainfo');
+        var username = document.getElementById('username');
+        var fname = document.getElementById('fname');
+        var birthday = document.getElementById('birthday');
+        var sex = document.getElementById('sex');
+        var phone = document.getElementById('phone');
+        var email = document.getElementById('email');
+        
+        // 啟用編輯模式
+        datainfo.contentEditable = true;
+        username.contentEditable = true;
+        fname.contentEditable = true;
+        birthday.contentEditable = true;
+        sex.contentEditable = true;
+        phone.contentEditable = true;
+        email.contentEditable = true;
+        
+        datainfo.style.border = '1px solid red';
+        username.style.border = '1px solid red';
+        fname.style.border = '1px solid red';
+        birthday.style.border = '1px solid red';
+        sex.style.border = '1px solid red';
+        phone.style.border = '1px solid red';
+        email.style.border = '1px solid red';
+
+        document.getElementById("photo").style.display = "none";
+        document.getElementById("photo-form").style.display = "block";
+    }
+    
+    function saveChanges() {
+        // 取得修改後的資料
+        var datainfo = document.getElementById('datainfo').innerText;
+        var username = document.getElementById('username').innerText;
+        var fname = document.getElementById('fname').innerText;
+        var birthday = document.getElementById('birthday').innerText;
+        var sex = document.getElementById('sex').innerText;
+        var phone = document.getElementById('phone').innerText;
+        var email = document.getElementById('email').innerText;
+        
+        console.log('新的個人簡介：', datainfo);
+        console.log('新的帳號：', username);
+        console.log('新的姓名：', fname);
+        console.log('新的生日：', birthday);
+        console.log('新的性別：', sex);
+        console.log('新的手機：', phone);
+        console.log('新的email：', email);
+    }
+
+    document.getElementById("photo-form").addEventListener("submit", function(event) {
+        event.preventDefault(); // 防止表單提交
+        var imageInput = document.getElementById("photo-input");
+        var selectedImage = imageInput.files[0];
+        
+        if (selectedImage) {
+            var reader = new FileReader();
+            reader.onload = function(event) {
+                document.getElementById("photo").src = event.target.result;
+                document.getElementById("photo").style.display = "block";
+                document.getElementById("photo-form").style.display = "none";
+            };
+            reader.readAsDataURL(selectedImage);
+        }
+    });
+  </script>
+</body>
+</html>
+
+</body>
+</html>
