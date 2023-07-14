@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="/static/css/swiper.css">
     <!--================= Style CSS =================-->
     <link rel="stylesheet" href="/static/css/style.css">
-    
+</head>
 
 <body>
     <!--================= Header One Start =================-->
@@ -77,8 +77,8 @@
                                             </span>
                                         </a>
                                         <ul class="sub-menu">
-                                          <li class="menu-item"><a href="/mylove/"><span><span>我的收藏</span><span class="suffix">//</span></span></a></li>
-                                          <li class="menu-item"><a href="/mypost/"><span><span>我的貼文</span><span class="suffix">//</span></span></a></li>
+                                          <li class="menu-item"><a href=""><span><span>我的收藏</span><span class="suffix">//</span></span></a></li>
+                                          <li class="menu-item"><a href=""><span><span>我的貼文</span><span class="suffix">//</span></span></a></li>
                                         </ul>
                                     </li>
                                     <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-117 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-130">
@@ -190,14 +190,14 @@
       <div class="container">
           <div class="search_content">
             <div class="search_wrapper">
-                <form id="search-form" class="main_form" action="/name_search" method="post">
+                <form id="search-form" class="main_form" action="." method="post">
                     <div class="input">
                         {% comment %} 輸入收尋得值 {% endcomment %}
                         <input id="search-input" type="text" placeholder="今天想來點什麼..." name="searchname" autocomplete="off">
                     </div>
                     <div class="search">
                         <input type="submit" class="pe-7s-search" value="今天想點">
-                        
+                        <a href="/search/" class="pe-7s-search"></a>
 
                           <script>
                           document.querySelector(".pe-7s-search").addEventListener("click", function(event) {
@@ -284,8 +284,8 @@
                     <!-- !Social List -->
                     <div class="logo">
                         <a href="/">
-                            <img class="retina_logo" src="static/picture/logo.png" alt="logo">
-                            <img class="desktop_logo" src="static/picture/logo.png" alt="logo">
+                            <img class="retina_logo" src="/static/picture/logo.png" alt="logo">
+                            <img class="desktop_logo" src="/static/picture/logo.png" alt="logo">
                         </a>
                     </div>
                     <div class="search_opener">
@@ -537,7 +537,7 @@
                         </a>
                         <ul class="sub-menu">
                             <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-140">
-                                <a href="/mylove/">
+                                <a href="">
                                     <span>
                                     <span>我的收藏</span>
                                     <span class="suffix">//</span>
@@ -545,7 +545,7 @@
                                 </a>
                             </li>
                             <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-141">
-                                <a href="/mypost/">
+                                <a href="">
                                     <span>
                                     <span>我的貼文</span>
                                     <span class="suffix">//</span>
@@ -604,8 +604,74 @@
         </div>
     </div>
     <!--================= Mobile Menu Start Here =================-->
+    <!--================= Interior Section Start =================-->
+   
+    <div class="xoxo_fn_hassidebar">
+        <div class="sidebar_in">
+            <div class="xoxo_fn_sidebar">
+                <div class="widget_block clear widget_xoxo_custom_categories">
+                    <div class="wid-title">
+                        <span class="text">尋找美食</span>
+                        <span class="icon"></span>
+                    </div>
+                    <div class="xoxo_fn_hassidebar">
+                        <div class="xoxo_fn_rightsidebar">
+                            <ul class="post_list">
+                                {% for data in data %}
+                                <li class="post_item">
+                                    <div class="blog__item blog__item_classic">
+                                        <span class="post_icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="512.000000pt" height="512.000000pt" viewbox="0 0 512.000000 512.000000" preserveaspectratio="xMidYMid meet" class="fn__svg  replaced-svg">
+                                                <!-- SVG 路徑 -->
+                                            </svg>
+                                        </span>
+                                        <div class="fn__meta">
+                                            <p>
+                                                <span class="meta_item meta_date">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="470.000000pt" height="470.000000pt" viewbox="0 0 470.000000 470.000000" preserveaspectratio="xMidYMid meet" class="fn__svg  replaced-svg">
+                                                        <!-- SVG 路徑 -->
+                                                    </svg>
+                                                    {{ data.upload_date }}
+                                                </span>
+                                                <span class="meta_item meta_category">
+                                                    <a class="fn_last_category" href="">{{ data.tag }}</a>
+                                                </span>
+                                            </p>
+                                        </div>
+                                        <div class="bottom_holder">
+                                            <div class="blog__image">
+                                                <a href=""><img src="/media/{{ data.food_img }}" alt="Post Image"></a>
+                                            </div>
+                                            <div class="title_holder">
+                                                <div class="title">
+                                                    <h3><a href="">{{ data.food_name }}</a></h3>
+                                                </div>
+                                                <div class="read_more">
+                                                    <div class="read_in">
+                                                        <a href="/quote_post/{{data.food_no}}"><span class="text">觀看更多</span><span class="triple"></span></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    
+            </div>
+        </div>
+    </div>
 
     
+                                              
+                           
+    <!--================= Interior Section End =================-->
+    <!--================= Home One Start =================-->
+    <div class="xoxo_fn_content">
+        
+    </div>
     
 
   
@@ -631,17 +697,17 @@
 
 
     <!--================= jquery lastest version =================-->
-    <script src="static/js/jquery.min.js"></script>
+    <script src="/static/js/jquery.min.js"></script>
     <!--================= Isotop JS =================-->
-    <script src="static/js/isotope.js"></script>
+    <script src="/static/js/isotope.js"></script>
     <!--================= Magnific Popup JS =================-->
-    <script src="static/js/magnific.popup.js"></script>
+    <script src="/static/js/magnific.popup.js"></script>
     <!--================= Modernizr JS =================-->
-    <script src="static/js/modernizr.custom.js"></script>
+    <script src="/static/js/modernizr.custom.js"></script>
     <!--================= Swiper JS =================-->
-    <script src="static/js/swiper.js"></script>
+    <script src="/static/js/swiper.js"></script>
     <!--================= Main JS =================-->
-    <script src="static/js/main.js"></script>
+    <script src="/static/js/main.js"></script>
     <!--================= Script End Here =================-->
 </body>
 
