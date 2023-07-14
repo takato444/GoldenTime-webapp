@@ -4,6 +4,35 @@
 {% block content %}
     <!-- login.html 的內容 -->
     <!-- 放只有這頁才有的內容 -->
+    <script>
+        function validateForm() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+
+            if (username.trim() === "") {
+                alert("請輸入帳號");
+                return false;
+            }
+
+            if (password.trim() === "") {
+                alert("請輸入密碼");
+                return false;
+            }
+
+            var specialChars = /[!@#$%^&*(),.?":{}|<>]/;
+            if (specialChars.test(username)) {
+                alert("帳號不能包含特殊字符");
+                return false;
+            }
+
+            if (specialChars.test(password)) {
+                alert("密碼不能包含特殊字符");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
     <div class="xoxo_fn_nosidebar">
         <div class="container blog_layout_classic_container">
             <div class="xoxo_fn_bloglist blog_layout_classic">
