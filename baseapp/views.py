@@ -8,9 +8,9 @@ from baseapp.models import basedata,food,mesg,love
 def admin(request):
 	return redirect('/admin/')
 def into_index(request):
-    if request.user.is_authenticated:
-    	   name=request.user.username
-    return render(request,'main.html',locals())
+	if request.user.is_authenticated:
+		name=request.user.username
+	return render(request,'main.html',locals())
 def into_sign(request):
     pass
 def into_upload(request):
@@ -64,14 +64,17 @@ def myinfo(request):
 	if request.user.is_authenticated:
 		username = request.user.username
 		data = basedata.objects.filter(username__exact=username)
-		# data_list = list(data)
-		# sex = data_list
-		# birthday = data.birthday
-		# info = data.info
-		# phone = data.phone
 		return render(request,'myinfo.html',locals())
 	else:
 		return redirect('/login/')
+def edit_member(request, member_id):
+	member = basedata.objects.get(id=member_id)
+	if request.method == 'POST':
+		member.info = request.POST['info']
+        # 將其他資料欄位的處理類似上面一樣添加
+		member.save()
+		return redirect('myinfo')  # 這裡根據你的URL設定調整
+	return render(request, 'edit_member.html', {'data': member})
 def into_sigin(request):
     return render(request,'sigin.html',locals())
 def logout(request):
