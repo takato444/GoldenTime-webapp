@@ -11,6 +11,8 @@ def into_index(request):
 	if request.user.is_authenticated:
 		name=request.user.username
 	return render(request,'main.html',locals())
+def admin_page(request):
+	return render(request,'admin_page.html',locals())
 def into_sign(request):
     pass
 def into_upload(request):
