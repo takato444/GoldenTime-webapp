@@ -20,7 +20,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('admin_page/', views.admin_page),
+        path('admin_page/', views.admin_page),
     path('addtestuser',views.addtestuser),
     path('/',views.into_index),
     path('',views.into_index),
@@ -36,9 +36,11 @@ urlpatterns = [
     path('into_login/',views.login),
     path('showdata/',views.showdata),
     path('addtestdata',views.addtestdata),
-    path('edit/<str:id>/', views.edit), # 由 瀏覽器 開啟
-	path('edit/<str:id>/<str:mode>', views.edit), # 由 edit.html 按 送出 鈕
+    path('edit/', views.edit), # 由 瀏覽器 開啟
     path('delete/<str:id>/', views.delete),
-    path('quote_post/',views.quote_post),
-    path('search/',views.into_search),
+    path('quote_post/<str:food_no>',views.quote_post),
+    path('search/',views.name_search),
+    path('joinlove/<str:food_no>',views.joinlove),
+    path('comment/<str:food_no>',views.comment),
+    path('kill/<str:food_no>',views.kill),
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
