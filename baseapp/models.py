@@ -2,7 +2,7 @@ from django.db import models
 from django.utils import timezone
 class basedata(models.Model):
     username = models.CharField(max_length=20,null = False,primary_key = True)
-    photo = models.ImageField(upload_to='image/',blank=False,default="image/logo.png")
+    photo = models.ImageField(upload_to='photo/',blank=False,default="image/logo.png")
     fname = models.CharField(max_length=20, null=False)
     lname = models.CharField(max_length = 20, null=False)
     sex = models.CharField(max_length=2, default='M', null=False)
@@ -24,9 +24,9 @@ class food(models.Model):
 class mesg(models.Model):
     mes_no = models.AutoField(primary_key = True)
     context =models.CharField(max_length = 255)
-    username = models.ForeignKey(basedata,on_delete = models.CASCADE)
-    food_no = models.ForeignKey(food, on_delete = models.CASCADE)
+    username = models.ForeignKey("basedata",on_delete = models.CASCADE)
+    food_no = models.ForeignKey("food", on_delete = models.CASCADE)
 class love(models.Model):
     love_no = models.AutoField(primary_key=True,null=False)
     username = models.ForeignKey("basedata",on_delete=models.CASCADE)
-    mes_no = models.ForeignKey("food",on_delete=models.CASCADE)
+    food_no = models.ForeignKey("food",on_delete=models.CASCADE)

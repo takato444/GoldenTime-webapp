@@ -4,15 +4,22 @@ from django.http import HttpResponse
 from django.contrib import auth
 from django.contrib.auth.models import User
 from baseapp.models import basedata,food,mesg,love
+from tensorflow.keras.models import load_model
+from pyimagesearch import config
+import output
+import numpy as np
+import imutils
+import cv2
 # from .forms import foodform
 def admin(request):
 	return redirect('/admin/')
+def admin_page(request):
+    	return render(request,'admin_page.html',locals())
 def into_index(request):
+	data = food.objects.all().order_by('food_no')
 	if request.user.is_authenticated:
 		name=request.user.username
 	return render(request,'main.html',locals())
-def admin_page(request):
-	return render(request,'admin_page.html',locals())
 def into_sign(request):
     pass
 def into_upload(request):
@@ -30,14 +37,62 @@ def into_upload(request):
 			food_img = food_img[0]
 			unit.food_img = food_img 
 			unit.save()
-			return redirect('/into_mypost/')
+			image = cv2.imread(unit.food_img.path)
+			image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+			image = cv2.resize(image, (224, 224))
+			image = image.astype("float32")
+			mean = np.array([123.68, 116.779, 103.939][::1], dtype="float32")
+			image -= mean
+			model = load_model(config.MODEL_PATH)
+			preds = model.predict(np.expand_dims(image, axis=0))[0]
+			i = np.argmax(preds)
+			label = config.CLASSES[i]
+			if label == "Bread":
+				label = "麵包"
+			elif label == "Dairy product":
+				label ="乳製品"
+			elif label =="Dessert":
+				label = "甜點"
+			elif label =="Egg":
+				label="蛋類"
+			elif label == "Fried food":
+				label = "炸物"
+			elif label=="Meat":
+				label="肉類"
+			elif label =="Noodles/Pasta":
+				label="麵類"
+			elif label =="Rice":
+				label = "飯類"
+			elif label=="Seafood":
+				label = "海鮮"
+			elif label=="Soup":
+				label = "湯品"
+			elif label=="Vegetable/Fruit":
+				label="蔬菜"
+			# 麵包、乳製品、甜點、蛋類、炸物、肉類、麵類、飯類、海鮮、湯品、蔬菜
+			# Bread,Dairy product,Dessert,Egg,Fried food,Meat,Noodles,Rice,Seafood,Soup,Vegetable
+			unit.tag=label
+			unit.save()
+			return redirect('/mypost/')
 		return render(request,'photo.html',locals())
 	else:
 		return redirect('/login/')
-def comment(request):
-    pass
-def search(request,searchname=None):
-	unit = food.objects.filter(food_name=searchname)
+def comment(request,food_no):
+	if request.method == "POST":
+		temp=food_no
+		username = basedata.objects.get(username=request.user.username)
+		food_no = food.objects.get(food_no=food_no)
+		comment = request.POST['comment']
+		unit = mesg.objects.create(username=username,food_no=food_no,context=comment)
+		unit.save()
+	return redirect('/quote_post/'+temp)
+def name_search(request):
+	if request.method == 'POST':
+		searchname = request.POST['searchname']
+		data = food.objects.filter(food_name=searchname)
+	return render(request,'search.html',locals())
+def search(request,searchname):
+	data = food.objects.filter(tag=searchname)
 	return render(request,'search.html',locals())
 def into_search(request):
 	data = food.objects.all().order_by('food_no')
@@ -66,17 +121,14 @@ def myinfo(request):
 	if request.user.is_authenticated:
 		username = request.user.username
 		data = basedata.objects.filter(username__exact=username)
+		# data_list = list(data)
+		# sex = data_list
+		# birthday = data.birthday
+		# info = data.info
+		# phone = data.phone
 		return render(request,'myinfo.html',locals())
 	else:
 		return redirect('/login/')
-def edit_member(request, member_id):
-	member = basedata.objects.get(id=member_id)
-	if request.method == 'POST':
-		member.info = request.POST['info']
-        # 將其他資料欄位的處理類似上面一樣添加
-		member.save()
-		return redirect('myinfo')  # 這裡根據你的URL設定調整
-	return render(request, 'edit_member.html', {'data': member})
 def into_sigin(request):
     return render(request,'sigin.html',locals())
 def logout(request):
@@ -123,31 +175,26 @@ def delete(request,id=None):  #刪除資料
 		except:
 			message = "讀取錯誤!"			
 	return render(request, "delete.html", locals())	
-def edit(request,id=None,mode=None):  
-	if mode == "edit":  # 由 edit.html 按 submit
-		unit = student.objects.get(id=id)
-		unit.username=request.GET['username']  #取得要修改的資料記錄
-		unit.fname=request.GET['fname']
-		unit.lname=request.GET['lname']
-		unit.sex=request.GET['sex']
-		unit.birthday=request.GET['birthday']
-		unit.email=request.GET['email']
-		unit.phone=request.GET['phone']
-		unit.info=request.GET['info']		
-		unit.save()  #寫入資料庫
-		message = '已修改...'
-		return redirect('/')	
-	else: # 由網址列
+def edit(request):
+	username = request.user.username
+	data = basedata.objects.filter(username__exact=username)
+	if request.method == 'POST':
+		unit = basedata.objects.get(username=username)
+		unit.fname=request.POST['fname']
+		unit.lname=request.POST['lname']
+		unit.sex=request.POST['sex']
+		unit.email=request.POST['email']
+		unit.phone=request.POST['phone']
+		unit.info=request.POST['info']
 		try:
-			unit = basedata.objects.get(id=id)  #取得要修改的資料記錄
-			strdate=str(unit.birthday)
-			strdate2=strdate.replace("年","-")
-			strdate2=strdate.replace("月","-")
-			strdate2=strdate.replace("日","-")
-			unit.birthday = strdate2
+			_,photo = request.FILES.popitem()
+			photo = photo[0]
+			unit.photo = photo
+			unit.save()
 		except:
-			message = "此 id不存在！"	
-		return render(request, "edit.html", locals())	
+			unit.save()
+		return redirect('/myinfo/')	
+	return render(request, "myinfo-edit.html", locals())	
 def addtestuser(request):	
 	try:
 		user=User.objects.get(username="test")
@@ -179,12 +226,35 @@ def sigin(request):
 		user.last_name=lname
 		user.is_staff=False
 		user.save()
-		unit = basedata.objects.create(username=username,fname=fname,lname=lname, sex=sex, birthday=birthday,email=email,phone=phone, info=info) 
+		unit = basedata.objects.create(username=username,fname=fname,lname=lname, sex=sex, birthday=birthday,email=email,phone=phone, info=info)
+		_,photo = request.FILES.popitem()
+		photo = photo[0]
+		unit.photo = photo  
 		unit.save()  #寫入資料庫
 		return redirect('/')
 	# message = "帳號已經存在"
 	# return HttpResponse("error")
 	return render(request,'sigin.html',locals())
-def quote_post(request):
+def quote_post(request,food_no):
+	data = food.objects.filter(food_no=food_no)
+	user = basedata.objects.filter(food__food_no=food_no)
+	# comment = mesg.objects.all().order_by('username')
+	comment = mesg.objects.filter(food_no=food_no)
 	return render(request,'quote-post.html',locals())
+def joinlove(request,food_no):
+	if request.user.is_authenticated:
+		username = basedata.objects.get(username=request.user.username)
+		food_no=food.objects.get(food_no=food_no)
+		q = love.objects.filter(username__exact=username,food_no__exact=food_no)
+		q=list(q)
+		if not q:
+			unit = love.objects.create(username=username,food_no=food_no)
+			unit.save()
+	return redirect('/mylove/')
 # Create your views here.
+def kill(request,food_no):
+	if request.user.is_authenticated:
+		unit = food.objects.filter(food_no__exact=food_no)
+		unit.delete()
+	return redirect('/mypost/')
+  #刪除資料
