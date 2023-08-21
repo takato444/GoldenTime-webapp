@@ -13,8 +13,6 @@ import cv2
 # from .forms import foodform
 def admin(request):
 	return redirect('/admin/')
-def admin_page(request):
-    	return render(request,'admin_page.html',locals())
 def into_index(request):
 	data = food.objects.all().order_by('food_no')
 	if request.user.is_authenticated:
