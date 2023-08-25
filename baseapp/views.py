@@ -14,7 +14,7 @@ import cv2
 def admin(request):
 	return redirect('/admin/')
 def adminpage(request):
-    return redirect('/adminpage/')
+    return redirect('admin＿page.html')
 def into_index(request):
 	data = food.objects.all().order_by('food_no')
 	if request.user.is_authenticated:
