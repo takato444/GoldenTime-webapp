@@ -129,6 +129,26 @@ def myinfo(request):
 		return render(request,'myinfo.html',locals())
 	else:
 		return redirect('/login/')
+def myinfo_edit(request):
+	username = request.user.username
+	data = basedata.objects.filter(username__exact=username)
+	if request.method == 'POST':
+		unit = basedata.objects.get(username=username)
+		unit.fname=request.POST['fname']
+		unit.lname=request.POST['lname']
+		unit.sex=request.POST['sex']
+		unit.email=request.POST['email']
+		unit.phone=request.POST['phone']
+		unit.info=request.POST['info']
+		try:
+			_,photo = request.FILES.popitem()
+			photo = photo[0]
+			unit.photo = photo
+			unit.save()
+		except:
+			unit.save()
+		return redirect('/myinfo/')	
+	return render(request,'myinfo_edit.html', locals())
 def into_sigin(request):
     return render(request,'sigin.html',locals())
 def logout(request):
@@ -194,7 +214,7 @@ def edit(request):
 		except:
 			unit.save()
 		return redirect('/myinfo/')	
-	return render(request, "myinfo-edit.html", locals())	
+	return render(request, "myinfo_edit.html", locals())
 def addtestuser(request):	
 	try:
 		user=User.objects.get(username="test")

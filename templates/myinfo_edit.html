@@ -1,147 +1,59 @@
-<!-- myinfo.html -->
+<!-- myinfo_edit.html -->
 {% extends 'page.html' %}<!-- 連接模板 -->
 
 {% block content %}
-    <!-- myinfo.html 的內容 -->
+    <!-- myinfo_edit.html 的內容 -->
     <!-- 放只有這頁才有的內容 -->
-    <script>
-        function enableEditMode() {
-          // 取得個人資料
-          var datainfo = document.getElementById('datainfo');
-          var username = document.getElementById('username');
-          var fname = document.getElementById('fname');
-          var birthday = document.getElementById('birthday');
-          var sex = document.getElementById('sex');
-          var phone = document.getElementById('phone');
-          var email = document.getElementById('email');
-    
-          // 啟用編輯模式
-          datainfo.contentEditable = true;
-          username.contentEditable = true;
-          fname.contentEditable = true;
-          birthday.contentEditable = true;
-          sex.contentEditable = true;
-          phone.contentEditable = true;
-          email.contentEditable = true;
-    
-          datainfo.style.border = '1px solid red';
-          username.style.border = '1px solid red';
-          fname.style.border = '1px solid red';
-          birthday.style.border = '1px solid red';
-          sex.style.border = '1px solid red';
-          phone.style.border = '1px solid red';
-          email.style.border = '1px solid red';
-    
-          document.getElementById('photo').style.display = 'none';
-          document.getElementById('profile-form').style.display = 'block';
-        }
-    
-        function saveChanges(event) {
-          event.preventDefault(); // 防止表單提交
-    
-          // 取得修改後的資料
-          var datainfo = document.getElementById('datainfo').innerText;
-          var username = document.getElementById('username').innerText;
-          var fname = document.getElementById('fname').innerText;
-          var birthday = document.getElementById('birthday').innerText;
-          var sex = document.getElementById('sex').innerText;
-          var phone = document.getElementById('phone').innerText;
-          var email = document.getElementById('email').innerText;
-    
-          console.log('新的個人簡介：', datainfo);
-          console.log('新的帳號：', username);
-          console.log('新的姓名：', fname);
-          console.log('新的生日：', birthday);
-          console.log('新的性別：', sex);
-          console.log('新的手機：', phone);
-          console.log('新的email：', email);
-    
-          // 處理頭像更改
-          var photoInput = document.getElementById('photo-input');
-          var selectedPhoto = photoInput.files[0];
-    
-          if (selectedPhoto) {
-            var reader = new FileReader();
-            reader.onload = function(event) {
-              document.getElementById('photo').src = event.target.result;
-              document.getElementById('photo').style.display = 'block';
-              document.getElementById('profile-form').style.display = 'none';
-            };
-            reader.readAsDataURL(selectedPhoto);
-          }
-    
-          // 更新修改後的資料到對應的元素
-          document.getElementById('datainfo').innerText = datainfo;
-          document.getElementById('username').innerText = username;
-          document.getElementById('fname').innerText = fname;
-          document.getElementById('birthday').innerText = birthday;
-          document.getElementById('sex').innerText = sex;
-          document.getElementById('phone').innerText = phone;
-          document.getElementById('email').innerText = email;
-    
-          // 取消編輯模式並隱藏紅色的編輯框
-          var dataElements = document.querySelectorAll('#datainfo, #username, #fname, #birthday, #sex, #phone, #email');
-          dataElements.forEach(function(element) {
-            element.contentEditable = false;
-            element.style.border = 'none';
-          });
-    
-          // 清空表單的選取項目
-          document.getElementById('photo-input').value = '';
-    
-          // 顯示儲存成功訊息或重新載入頁面
-          alert('資料已儲存！');
-          window.location.reload(); 
-        }
-    
-        document.getElementById('profile-form').addEventListener('submit', saveChanges);
-    </script>
     <div class="xoxo_fn_hassidebar">
         <div class="sidebar_in">
             <div class="xoxo_fn_sidebar">
                 <div class="xoxo_fn_nosidebar">
                     <div class="container blog_layout_classic_container">
                         <div class="xoxo_fn_bloglist blog_layout_classic">
-                            <div class="widget_block clear widget_xoxo_custom_categories">
-                                <div class="wid-title">
-                                    <span class="text">關於我</span>
-                                    <span class="icon"></span>
-                                </div>
-                                <ul>{% for data in data %}
-                                    <div class="xoxo_fn_widget_author">
-                                        <!--================= cmd＋f 更改圖片=================-->
-                                        <div class="info_img" id="photo" style="background-image: url(/media/{{data.photo}});">
-                                            <div class="abs_img"></div>
-                                        </div>
-                                        <div class="info_desc">
-                                            <div class="author_top">
-                                                <h3 class="fn_title">
-                                                    <a href="#0">{{name}}</a>
-                                                </h3>
-                                                <p class="fn_desc">
-                                                    <div id=""></div>
-                                                    <!--================= cmd＋f 內文=================-->
-                                                    個人簡介：<div id="datainfo">{{data.info}}</div><br>
-                                                    帳號：<div id="username">{{data.username}}</div><br>
-                                                    姓名：<div id="fname">{{data.fname}} {{data.lname}}</div><br>
-                                                    生日：<div id="birthday">{{data.birthday}}</div><br>
-                                                    性別：<div id="sex">{{data.sex}}</div><br>
-                                                    手機：<div id="phone">{{data.phone}}</div><br>
-                                                    email：<div id="email">{{data.email}}</div><br>
-                                                    {%endfor%}
-                                                </p>
-                                            </div>
-                                            <form id="profile-form" style="display: none;">
-                                                <!--================= cmd＋f上傳照片=================-->
-                                                更換頭像：<input type="file" id="photo-input"><br><br>
-                                                <span class="xoxo_submit"><input type="submit" value="儲存" ></span>
-                                            </form>
-                                            <br>
-                                            <span class="xoxo_submit"><input type="submit" value="編輯" onclick="enableEditMode()"></span>
-                                        
-                                        </div>  
+                            <div class="input">
+                                <div class="widget_block clear widget_xoxo_custom_categories">
+                                    <div class="wid-title">
+                                        <span class="text">編輯我的資料</span>
                                     </div>
-                                </ul>
+                                    <ul>
+                                        <form action="." method="POST" enctype="multipart/form-data" >{% csrf_token %}
+                                            <div class="input">
+                                                <h3>電子郵件：
+                                                    <input type="text" placeholder="請輸入電子郵件" name="email" required>
+                                                </h3>
+                                                <h3>電&emsp;&emsp;話：
+                                                    <input type="text" placeholder="請輸入您的電話" name="phone" required>
+                                                </h3>
+                                                <h3>姓&emsp;&emsp;氏：
+                                                    <input type="text" placeholder="請輸入您的姓氏" name="lname" required>
+                                                </h3>
+                                                <h3>名&emsp;&emsp;字：
+                                                    <input type="text" placeholder="請輸入您的名字" name="fname" required>
+                                                </h3>
+                                                <h3>變更密碼：
+                                                    <input type="password" placeholder="請輸入密碼" name="password" required>
+                                                </h3>
+                                                <h3>確認密碼：
+                                                    <input type="password" placeholder="請再輸入一次密碼" name="password2" required>
+                                                </h3>
+                                                <h3>個人簡介：
+                                                    <div class="input-holder">
+                                                        <textarea placeholder="請輸入您的個人簡介讓我們了結你的個人喜好" name="info" aria-required="true" rows="10" tabindex="1"></textarea>
+                                                    </div> 
+                                                </h3>
+                                                <!--================= cmd＋f 個人頭貼=================-->
+                                                <h3>上傳您的大頭貼：</h3>
+                                                <input type="file" id="file-input" name="photo" accept=".jpg, .jpeg, .png">
+                                            </div>
+                                        </br>
+                                            <div class="read_more">
+                                                <div class="read_in">
+                                                    <span class="xoxo_submit"><input type="submit" value="儲存"></span>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>

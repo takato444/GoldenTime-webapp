@@ -28,11 +28,12 @@
                                         <h3>&emsp;&emsp;名字：
                                             <input type="text" placeholder="請輸入您的名字" name="fname" required>
                                         </h3>
-                                        <h3>生日：&ensp; 
+                                        <h3>生日：&ensp;
                                             <input type="date" placeholder="請輸入您的生日" name="birthday" required>
                                         </h3>
-                                        <h3>&emsp;&emsp;性別：
-                                            <input type="text" placeholder="請輸入您的性別" name="sex" required>
+                                        <h3>性別：
+                                            <input type="radio" name="sex" value="male">&ensp;男&ensp;
+                                            <input type="radio" name="sex" value="female">&ensp;女<p>
                                         </h3>
                                         <h3>&emsp;&emsp;密碼：
                                             <input type="password" placeholder="請輸入密碼" name="password" required>
@@ -40,10 +41,11 @@
                                         <h3>確認密碼：
                                             <input type="password" placeholder="請再輸入一次密碼" name="password2" required>
                                         </h3>
-                                        <h3>簡介：</h3>
-                                        <div class="input-holder">
-                                            <textarea placeholder="請輸入您的個人簡介讓我們了結你的個人喜好" name="info" aria-required="true" rows="10" tabindex="1"></textarea>
-                                        </div>  
+                                        <h3>個人簡介：
+                                            <div class="input-holder">
+                                                <textarea placeholder="請輸入您的個人簡介讓我們了結你的個人喜好" name="info" aria-required="true" rows="10" tabindex="1"></textarea>
+                                            </div> 
+                                        </h3>
                                         <!--================= cmd＋f 個人頭貼=================-->
                                         <h3>上傳您的大頭貼：</h3>
                                         <input type="file" id="file-input" name="photo" accept=".jpg, .jpeg, .png">
