@@ -4,7 +4,7 @@
 {% block content %}
     <!-- mypost.html 的內容 -->
     <!-- 放只有這頁才有的內容 -->
-    <div class="xoxo_fn_hassidebar">    
+<div class="xoxo_fn_hassidebar">    
         <div class="xoxo_fn_sidebar">
             <div class="container blog_layout_classic_container">
                 <div class="widget_block clear widget_xoxo_custom_categories">
@@ -43,15 +43,14 @@
                                        </p>
                                    </div>
                                    <div class="bottom_holder">
-                                        <div class="blog__image">
-                                            <a href="/quote_post/{{data.food_no}}"><img src="/media/{{data.food_img}}" alt="Post Image"></a>
-                                        </div>
-                                        <div class="title_holder">
-                                            <div class="title">
-                                                <h3><a href="/quote_post/{{data.food_no}}">{{data.food_name}}</a></h3>
-                                            </div>
-                                        </div>
-                                        <a href="/mypost/"><span class="xoxo_submit"><input type="submit" value="刪除貼文"></span></a>
+                                       <div class="blog__image">
+                                           <a href="/quote_post/{{data.food_no}}"><img src="/media/{{data.food_img}}" alt="Post Image"></a>
+                                       </div>
+                                       <div class="title_holder">
+                                           <div class="title">
+                                               <h3><a href="/quote_post/{{data.food_no}}">{{data.food_name}}</a></h3>
+                                           </div>
+                                       </div>
                                    </div>
                                </div>
                                 <br>
@@ -62,4 +61,6 @@
             </div>
         </div>
     </div>
+
+    
 {% endblock %}
