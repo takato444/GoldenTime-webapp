@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,7 +21,7 @@
     <link rel="stylesheet" href="/static/css/swiper.css">
     <!--================= Style CSS =================-->
     <link rel="stylesheet" href="/static/css/style.css">
-    
+</head>
 
 <body>
     <!--================= Header One Start =================-->
@@ -72,7 +71,7 @@
                                     <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-117 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-130">
                                         <a href="#0">
                                             <span>
-											<span>我的美食</span>
+											                      <span>我的美食</span>
                                             <span class="suffix"></span>
                                             </span>
                                         </a>
@@ -104,7 +103,7 @@
                         </div>
                         <div class="icon_bar">
                             <div class="icon_bar__item icon_bar__home">
-                                <a href="">
+                                <a href="#0">
                                     <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="512.000000pt" height="429.000000pt" viewbox="0 0 512.000000 429.000000" preserveaspectratio="xMidYMid meet" class="fn__svg  replaced-svg">
                                         <g transform="translate(0.000000,429.000000) scale(0.100000,-0.100000)" stroke="none">
                                             <path d="M1335 3349 c-671 -517 -1246 -960 -1277 -984 l-58 -45 177 -229 177 -230 35 28 c20 16 516 398 1104 849 l1067 821 1068 -821 c587 -451 1083 -833 1103 -849 l35 -28 176 229 176 228 -21 20 c-12 10 -176 137 -364 282 l-343 262 0 464 0 464 -367 -2 -368 -3 -3 -172 c-1 -95 -5 -173 -8 -173 -3 0 -248 187 -544 415 -297 228 -541 415 -542 414 -2 0 -552 -423 -1223 -940z"></path>
@@ -186,43 +185,42 @@
     <!--================= Sticky Menu End Here =================-->
 
     <div class="xoxo_fn_searchbox">
-      <a href="#" class="search_closer"><span></span></a>
-      <div class="container">
-          <div class="search_content">
-            <div class="search_wrapper">
-                <form id="search-form" class="main_form" action="/name_search" method="post">
-                    <div class="input">
-                        {% comment %} 輸入收尋得值 {% endcomment %}
-                        <input id="search-input" type="text" placeholder="今天想來點什麼..." name="searchname" autocomplete="off">
-                    </div>
-                    <div class="search">
-                        <input type="submit" class="pe-7s-search" value="今天想點">
-                        
-
-                          <script>
-                          document.querySelector(".pe-7s-search").addEventListener("click", function(event) {
-                              event.preventDefault();  // 防止點擊連結的預設行為
-                              var searchQuery = "";  // 填入你的搜尋關鍵字
-                              window.location.href = "/search/" + encodeURIComponent(searchQuery);
-                              form.method = "post";
-                              form.submit();
-                          });
-                          </script>
-
-                        <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="488.000000pt" height="488.000000pt" viewbox="0 0 488.000000 488.000000" preserveaspectratio="xMidYMid meet" class="fn__svg  replaced-svg">
-                            <g transform="translate(0.000000,488.000000) scale(0.100000,-0.100000)" stroke="none">
-                                <path d="M2140 4874 c-165 -20 -218 -28 -303 -45 -263 -54 -570 -183 -792 -332 -179 -121 -378 -299 -510 -457 -271 -326 -444 -714 -511 -1150 -22 -142 -25 -488 -6 -630 92 -667 461 -1257 1019 -1631 538 -362 1205 -477 1842 -318 181 45 304 92 501 191 163 82 179 88 235 88 103 -1 126 -17 395 -284 216 -214 253 -246 310 -271 57 -26 77 -30 160 -30 86 0 101 3 162 32 89 42 151 101 191 182 30 62 32 72 32 176 0 104 -2 114 -33 180 -29 61 -60 96 -267 305 -258 259 -274 282 -275 385 0 56 6 72 88 235 99 197 146 320 191 501 174 699 17 1434 -427 1994 -78 98 -241 264 -347 353 -312 262 -725 447 -1137 508 -99 14 -446 27 -518 18z m476 -823 c401 -82 743 -312 970 -651 360 -540 333 -1254 -66 -1769 -306 -393 -781 -612 -1274 -587 -700 35 -1268 524 -1418 1220 -18 85 -22 133 -21 296 0 170 3 210 25 310 63 286 195 534 397 744 251 259 562 412 941 460 85 11 348 -3 446 -23z">
-                                </path>
-                            </g>
-                        </svg>
-                    </div>
-                </form>
-                <!-- <div id="search-results"></div> -->
-            </div>
-          </div>
-      </div>
-  </div>
-
+        <a href="#" class="search_closer"><span></span></a>
+        <div class="container">
+            <div class="search_content">
+                <div class="search_wrapper">
+                    <form id="search-form" class="main_form" action="." method="post">
+                        <div class="input">
+                            {% comment %} 輸入收尋得值 {% endcomment %}
+                            <input id="search-input" type="text" placeholder="今天想來點什麼..." name="searchname" autocomplete="off">
+                        </div>
+                        <div class="search">
+                            <input type="submit" class="pe-7s-search" value="今天想點">
+                            <a href="/search/" class="pe-7s-search"></a>
+    
+                              <script>
+                              document.querySelector(".pe-7s-search").addEventListener("click", function(event) {
+                                  event.preventDefault();  // 防止點擊連結的預設行為
+                                  var searchQuery = "";  // 填入你的搜尋關鍵字
+                                  window.location.href = "/search/" + encodeURIComponent(searchQuery);
+                                  form.method = "post";
+                                  form.submit();
+                              });
+                              </script>
+    
+                            <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="488.000000pt" height="488.000000pt" viewbox="0 0 488.000000 488.000000" preserveaspectratio="xMidYMid meet" class="fn__svg  replaced-svg">
+                                <g transform="translate(0.000000,488.000000) scale(0.100000,-0.100000)" stroke="none">
+                                    <path d="M2140 4874 c-165 -20 -218 -28 -303 -45 -263 -54 -570 -183 -792 -332 -179 -121 -378 -299 -510 -457 -271 -326 -444 -714 -511 -1150 -22 -142 -25 -488 -6 -630 92 -667 461 -1257 1019 -1631 538 -362 1205 -477 1842 -318 181 45 304 92 501 191 163 82 179 88 235 88 103 -1 126 -17 395 -284 216 -214 253 -246 310 -271 57 -26 77 -30 160 -30 86 0 101 3 162 32 89 42 151 101 191 182 30 62 32 72 32 176 0 104 -2 114 -33 180 -29 61 -60 96 -267 305 -258 259 -274 282 -275 385 0 56 6 72 88 235 99 197 146 320 191 501 174 699 17 1434 -427 1994 -78 98 -241 264 -347 353 -312 262 -725 447 -1137 508 -99 14 -446 27 -518 18z m476 -823 c401 -82 743 -312 970 -651 360 -540 333 -1254 -66 -1769 -306 -393 -781 -612 -1274 -587 -700 35 -1268 524 -1418 1220 -18 85 -22 133 -21 296 0 170 3 210 25 310 63 286 195 534 397 744 251 259 562 412 941 460 85 11 348 -3 446 -23z">
+                                    </path>
+                                </g>
+                            </svg>
+                        </div>
+                    </form>
+                    <!-- <div id="search-results"></div> -->
+                </div>
+              </div>
+        </div>
+    </div>
     <!--================= Header Start Here =================-->
     <header id="xoxo_fn_header">
         <div class="xoxo_fn_header">
@@ -284,8 +282,8 @@
                     <!-- !Social List -->
                     <div class="logo">
                         <a href="/">
-                            <img class="retina_logo" src="static/picture/logo.png" alt="logo">
-                            <img class="desktop_logo" src="static/picture/logo.png" alt="logo">
+                            <img class="retina_logo" src="/static/picture/logo.png" alt="logo">
+                            <img class="desktop_logo" src="/static/picture/logo.png" alt="logo">
                         </a>
                     </div>
                     <div class="search_opener">
@@ -310,6 +308,7 @@
                             <div class="menu">
                                 <div class="menu-main-menu-container">
                                     <ul id="menu-main-menu" class="xoxo_fn_main_nav">
+                                        <li class="menu-item"><a href="/"><span><span>回到主頁</span><span class="suffix"></span></span></a></li>
                                         <li class="menu-item menu-item-has-children">
                                             <a href="#0">
                                                 <span>
@@ -332,7 +331,7 @@
                                             </ul>
                                         </li>
                                         <li class="menu-item menu-item-has-children">
-                                            <a href="/upload/">
+                                            <a href="#0">
                                                 <span>
                                                 <span>我想發文</span>
                                                 <span class="suffix">//</span>
@@ -384,13 +383,15 @@
     </header>
     <!--================= Header End Here =================-->
     <!--================= Header One End =================-->
+
+    <!--================= Mobile Menu Start =================-->
     <!--================= Mobile Menu Start Here =================-->
     <div class="xoxo_fn_mobnav">
         <div class="mob_top">
             <div class="logo">
                 <div class="fn_logo">
                     <a href="/">
-                        <img class="mobile_logo" src="static/picture/logo.png" alt="logo">
+                        <img class="mobile_logo" src="/static/picture/logo.png" alt="logo">
                     </a>
                 </div>
             </div>
@@ -409,6 +410,7 @@
             </div>
         </div>
         <div class="mob_bot" style="display: none;">
+            
             <div class="menu-main-menu-container">
                 <ul id="menu-main-menu-1" class="mobile_menu">
                     <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-8">
@@ -510,7 +512,7 @@
                         </ul>
                     </li>
                     <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-9">
-                        <a href="/upload/">
+                        <a href="#">
                             <span>
                             <span>我想發文</span>
                             <span class="suffix"></span>
@@ -518,7 +520,7 @@
                         </a>
                         <ul class="sub-menu">
                             <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-140">
-                                <a href="/upload/">
+                                <a href="/upload">
                                     <span>
                                     <span>選照片發文</span>
                                     <span class="suffix">//</span>
@@ -562,7 +564,6 @@
                             </span>
                         </a>
                         <ul class="sub-menu">
-                            {% if request.user.is_authenticated %}
                             <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-140">
                                 <a href="/myinfo/">
                                     <span>
@@ -571,7 +572,7 @@
                                     </span>
                                 </a>
                             </li>
-                            <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-140">
+                            <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-141">
                                 <a href="/logout/">
                                     <span>
                                     <span>登出</span>
@@ -579,24 +580,6 @@
                                     </span>
                                 </a>
                             </li>
-                            {% else %}
-                            <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-141">
-                                <a href="/login/">
-                                    <span>
-                                    <span>登入</span>
-                                    <span class="suffix">//</span>
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-141">
-                                <a href="/into_sigin/">
-                                    <span>
-                                    <span>註冊</span>
-                                    <span class="suffix">//</span>
-                                    </span>
-                                </a>
-                            </li>
-                            {% endif %}
                         </ul>
                     </li>
                 </ul>
@@ -604,11 +587,11 @@
         </div>
     </div>
     <!--================= Mobile Menu Start Here =================-->
-
-    
-    
-
-  
+    <!--================= Mobile Menu End =================-->
+    {% block content %}
+    {% endblock %}
+    <!--================= Script Start Here =================-->
+    <!--================= Mouse Effect Start =================-->
     <div class="frenify-cursor cursor-outer" data-default="yes" data-link="yes" data-slider="no" style="visibility: visible; transform: translate(1591px, 538px);"><span class="fn-cursor"></span></div>
     <div class="frenify-cursor cursor-inner" data-default="yes" data-link="yes" data-slider="no" style="visibility: visible; transform: translate(360px, 544px);"><span class="fn-cursor"><span class="fn-left"></span><span class="fn-right"></span></span></div>
     <div class="loader-wrapper">
@@ -617,7 +600,10 @@
         <div class="loader-section section-left"></div>
         <div class="loader-section section-right"></div>
     </div>
-   
+    <!--================= Mouse Effect Start =================-->
+
+
+    <!--================= Scroll to Top Start =================-->
     <a class="xoxo_fn_totop active">
         <span class="progress_wrapper">
         <span class="progress" style="height: 91.8187%;"></span>
@@ -627,21 +613,22 @@
             </path>
         </svg>
     </a>
+    <!--================= Scroll to Top End =================-->
 
 
 
     <!--================= jquery lastest version =================-->
-    <script src="static/js/jquery.min.js"></script>
+    <script src="/static/js/jquery.min.js"></script>
     <!--================= Isotop JS =================-->
-    <script src="static/js/isotope.js"></script>
+    <script src="/static/js/isotope.js"></script>
     <!--================= Magnific Popup JS =================-->
-    <script src="static/js/magnific.popup.js"></script>
+    <script src="/static/js/magnific.popup.js"></script>
     <!--================= Modernizr JS =================-->
-    <script src="static/js/modernizr.custom.js"></script>
+    <script src="/static/js/modernizr.custom.js"></script>
     <!--================= Swiper JS =================-->
-    <script src="static/js/swiper.js"></script>
+    <script src="/static/js/swiper.js"></script>
     <!--================= Main JS =================-->
-    <script src="static/js/main.js"></script>
+    <script src="/static/js/main.js"></script>
     <!--================= Script End Here =================-->
 </body>
 
