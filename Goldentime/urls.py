@@ -31,6 +31,7 @@ urlpatterns = [
     path('search/<str:searchname>',views.search),
     path('mylove/',views.into_mylove),
     path('myinfo/',views.myinfo),
+    path('mysetting/',views.mysetting),
     path('myinfo_edit/',views.myinfo_edit),
     path('into_sigin/',views.sigin),
     path('logout/',views.logout),

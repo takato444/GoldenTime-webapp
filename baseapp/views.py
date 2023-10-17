@@ -149,6 +149,8 @@ def myinfo_edit(request):
 			unit.save()
 		return redirect('/myinfo/')	
 	return render(request,'myinfo_edit.html', locals())
+def mysetting(request):
+    return render(request,'mysetting.html',locals())
 def into_sigin(request):
     return render(request,'sigin.html',locals())
 def logout(request):
