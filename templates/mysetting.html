@@ -4,6 +4,28 @@
 {% block content %}
     <!-- mypost.html 的內容 -->
     <!-- 放只有這頁才有的內容 -->
+    <script>
+        // JavaScript 部分
+        const passwordForm = document.getElementById("passwordForm");
+        const currentPassword = document.getElementById("currentPassword");
+        const newPassword = document.getElementById("newPassword");
+
+        passwordForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+            currentPassword.value = "";
+            newPassword.value = "";
+            alert("密碼變更完成！");
+        });
+
+        const recommendationToggle = document.getElementById("recommendationToggle");
+        recommendationToggle.addEventListener("change", function() {
+            if (recommendationToggle.checked) {
+                alert("個人化推薦已開啟");
+            } else {
+                alert("個人化推薦已關閉");
+            }
+        });
+    </script>
 <div class="xoxo_fn_hassidebar">    
         <div class="xoxo_fn_sidebar">
             <div class="container blog_layout_classic_container">
@@ -15,7 +37,17 @@
                     <div class="xoxo_fn_hassidebar">
                         <div class="xoxo_fn_rightsidebar">
                             <ul> 
-                                
+                                <h2>變更密碼</h2>
+                                <form id="passwordForm">
+                                    <label for="currentPassword">舊密碼：</label>
+                                    <input type="password" id="currentPassword" required><br>
+                                    <label for="newPassword">新密碼：</label>
+                                    <input type="password" id="newPassword" required><br>
+                                    <button type="submit">確認</button>
+                                </form>
+                                <h2>個人化推薦</h2>
+                                <label>開啟個人化推薦</label>
+                                <input type="checkbox" id="recommendationToggle">
                             </ul>    
                         </div>
                     </div>
