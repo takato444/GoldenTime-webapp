@@ -1,60 +1,93 @@
-<!-- mypost.html -->
+<!-- mysetting.html -->
 {% extends 'page.html' %}<!-- 連接模板 -->
 
 {% block content %}
-    <!-- mypost.html 的內容 -->
-    <!-- 放只有這頁才有的內容 -->
-    <script>
-        // JavaScript 部分
-        const passwordForm = document.getElementById("passwordForm");
-        const currentPassword = document.getElementById("currentPassword");
-        const newPassword = document.getElementById("newPassword");
-
-        passwordForm.addEventListener("submit", function(event) {
-            event.preventDefault();
-            currentPassword.value = "";
-            newPassword.value = "";
-            alert("密碼變更完成！");
-        });
-
-        const recommendationToggle = document.getElementById("recommendationToggle");
-        recommendationToggle.addEventListener("change", function() {
-            if (recommendationToggle.checked) {
-                alert("個人化推薦已開啟");
-            } else {
-                alert("個人化推薦已關閉");
-            }
-        });
-    </script>
-<div class="xoxo_fn_hassidebar">    
-        <div class="xoxo_fn_sidebar">
-            <div class="container blog_layout_classic_container">
-                <div class="widget_block clear widget_xoxo_custom_categories">
-                    <div class="wid-title">
-                        <span class="text">個人設定</span>
-                        <span class="icon"></span>
-                    </div>
-                    <div class="xoxo_fn_hassidebar">
-                        <div class="xoxo_fn_rightsidebar">
-                            <ul> 
-                                <h2>變更密碼</h2>
-                                <form id="passwordForm">
-                                    <label for="currentPassword">舊密碼：</label>
-                                    <input type="password" id="currentPassword" required><br>
-                                    <label for="newPassword">新密碼：</label>
-                                    <input type="password" id="newPassword" required><br>
-                                    <button type="submit">確認</button>
-                                </form>
-                                <h2>個人化推薦</h2>
-                                <label>開啟個人化推薦</label>
-                                <input type="checkbox" id="recommendationToggle">
-                            </ul>    
+<!-- mysetting.html 的內容 -->
+<!-- 放只有這頁才有的內容 -->
+    <div class="xoxo_fn_hassidebar">
+        <div class="sidebar_in">
+            <div class="xoxo_fn_sidebar">
+                <div class="xoxo_fn_nosidebar">
+                    <div class="container blog_layout_classic_container">
+                        <div class="xoxo_fn_bloglist blog_layout_classic">
+                            <div class="widget_block clear widget_xoxo_custom_categories">
+                                <div class="wid-title">
+                                    <span class="text">個人化推薦設定</span>
+                                    <span class="icon"></span>
+                                </div>
+                                <ul> 
+                                    <form action="/" method="post">
+                                        <h5>飲食習慣:<br>
+                                            <label>
+                                                <input type="checkbox" name="都吃">都吃
+                                            </label>
+                                            <label>
+                                                <input type="checkbox" name="低油飲食">低油飲食
+                                            </label>
+                                            <label>
+                                                <input type="checkbox" name="高蛋白飲食">高蛋白飲食
+                                            </label>
+                                            <label>
+                                                <input type="checkbox" name="素食飲食">素食飲食
+                                            </label>
+                                            <label>
+                                                <input type="checkbox" name="無麩質飲食">無麩質飲食
+                                            </label>
+                                            <label>
+                                                <input type="checkbox" name="無乳制品飲食">無乳制品飲食
+                                            </label>
+                                            <label>
+                                                <input type="checkbox" name="低碳水化合物飲食">低碳水化合物飲食
+                                            </label>
+                                            <label>
+                                                <input type="checkbox" name="生食飲食">生食飲食
+                                            </label>
+                                        </h5>
+                                        <h5>口味偏好:<br>
+                                            <label>
+                                                <input type="checkbox" name="辣">辣
+                                            </label>
+                                            <label>
+                                                <input type="checkbox" name="甜">甜
+                                            </label>
+                                            <label>
+                                                <input type="checkbox" name="酸">酸
+                                            </label>
+                                            <label>
+                                                <input type="checkbox" name="鹹">鹹
+                                            </label>
+                                            <label>
+                                                <input type="checkbox" name="麻">麻
+                                            </label>
+                                            <label>
+                                                <input type="checkbox" name="苦">苦
+                                            </label>
+                                        </h5>
+                                        <h5>餐時偏好:<br>
+                                            <label>
+                                                <input type="checkbox" name="早餐" >早餐
+                                            </label>
+                                            <label>
+                                                <input type="checkbox" name="午餐" >午餐
+                                            </label>
+                                            <label>
+                                                <input type="checkbox" name="晚餐" >晚餐
+                                            </label>
+                                            <label>
+                                                <input type="checkbox" name="宵夜" >宵夜
+                                            </label>
+                                        </h5>
+                                        <input type="submit" value="保存設定">
+                                    </form>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+{% endblock %}
 
     
-{% endblock %}
+
