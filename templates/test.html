@@ -1,0 +1,64 @@
+<!-- search.html -->
+{% extends 'page.html' %}<!-- 連接模板 -->
+
+{% block content %}
+    <!-- search.html 的內容 -->
+    <!-- 放只有這頁才有的內容 -->
+
+    <div class="xoxo_fn_hassidebar">    
+        <div class="xoxo_fn_sidebar">
+            <div class="container blog_layout_classic_container">
+                <div class="widget_block clear widget_xoxo_custom_categories">
+                    <div class="wid-title">
+                        <span class="text">美食探勘</span>
+                        <span class="icon"></span>
+                    </div>
+                    <div class="xoxo_fn_hassidebar">
+                        <div class="xoxo_fn_rightsidebar">
+                            <ul class="post_list">
+                                {% for data in data %}
+                                <li class="post_item">
+                                    <div class="blog__item blog__item_classic">
+                                        <span class="post_icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="512.000000pt" height="512.000000pt" viewbox="0 0 512.000000 512.000000" preserveaspectratio="xMidYMid meet" class="fn__svg  replaced-svg">
+                                                <!-- SVG 路徑 -->
+                                            </svg>
+                                        </span>
+                                        <div class="fn__meta">
+                                            <p>
+                                                <span class="meta_item meta_date">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="470.000000pt" height="470.000000pt" viewbox="0 0 470.000000 470.000000" preserveaspectratio="xMidYMid meet" class="fn__svg  replaced-svg">
+                                                        <!-- SVG 路徑 -->
+                                                    </svg>
+                                                    {{ data.upload_date }}
+                                                </span>
+                                                <span class="meta_item meta_category">
+                                                    <a class="fn_last_category" href="">{{ data.tag }}</a>
+                                                </span>
+                                            </p>
+                                        </div>
+                                        <div class="bottom_holder">
+                                            <div class="blog__image">
+                                                <a href=""><img src="/media/{{ data.food_img }}" alt="Post Image"></a>
+                                            </div>
+                                            <div class="title_holder">
+                                                <div class="title">
+                                                    <h3><a href="">{{ data.food_name }}</a></h3>
+                                                </div>
+                                                <div class="read_more">
+                                                    <div class="read_in">
+                                                        <a href="/quote_post/{{data.food_no}}"><span class="text">觀看更多</span><span class="triple"></span></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>  
+                            </ul>{% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

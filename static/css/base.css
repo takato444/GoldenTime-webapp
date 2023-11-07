@@ -532,7 +532,7 @@ blockquote.right{margin-left:40px; text-align:left; margin-right:0; width:50%; f
 .clearfix:before{
 	clear: both;
 	display: table;
-	content: ''; 
+	content: '';
 }
 /*==設定開關鈕的長寬==*/
 .switch {

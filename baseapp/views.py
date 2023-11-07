@@ -10,16 +10,54 @@ import output
 import numpy as np
 import imutils
 import cv2
+import sys
+import collections
+# from compiler.ast import flatten
 # from .forms import foodform
 def admin(request):
 	return redirect('/admin/')
 def adminpage(request):
     return redirect('admin＿page.html')
-def into_index(request):
+def into_index(request):                          #抓推薦食物跟熱門食物
 	data = food.objects.all().order_by('food_no')
 	if request.user.is_authenticated:
 		name=request.user.username
 	return render(request,'main.html',locals())
+def image_search(request):
+	pass
+def pHash(imgfile): #phash演算法
+	"""get image pHash value"""
+	#加载并调整图片为32x32灰度图片
+	img=cv2.imread(imgfile, cv2.CV_LOAD_IMAGE_GRAYSCALE)
+	img=cv2.resize(img,(32,32),interpolation=cv2.INTER_CUBIC)
+ 
+	#创建二维列表
+	h, w = img.shape[:2]
+	vis0 = np.zeros((h,w), np.float32)
+	vis0[:h,:w] = img       #填充数据
+ 
+	#二维Dct变换
+	vis1 = cv2.dct(cv2.dct(vis0))
+	#cv.SaveImage('a.jpg',cv.fromarray(vis0)) #保存图片
+	vis1.resize(8,8)
+ 
+	#把二维list变成一维list
+	img_list=flat_gen(vis1.tolist()) 
+ 
+	#计算均值
+	avg = sum(img_list)*1./len(img_list)
+	avg_list = ['0' if i<avg else '1' for i in img_list]
+ 
+	#得到哈希值
+	return ''.join(['%x' % int(''.join(avg_list[x:x+4]),2) for x in range(0,64,4)])
+def flat_gen(x): #flatten
+    def iselement(e):
+        return not(isinstance(e, collections.Iterable) and not isinstance(e, str))
+    for el in x:
+        if iselement(el):
+            yield el
+        else:
+            yield from flat_gen(el)
 def into_sign(request):
     pass
 def into_upload(request):
@@ -80,7 +118,10 @@ def into_upload(request):
 def comment(request,food_no):
 	if request.method == "POST":
 		temp=food_no
-		username = basedata.objects.get(username=request.user.username)
+		try:
+			username = basedata.objects.get(username=request.user.username)
+		except:
+			return redirect('/login/')
 		food_no = food.objects.get(food_no=food_no)
 		comment = request.POST['comment']
 		unit = mesg.objects.create(username=username,food_no=food_no,context=comment)
