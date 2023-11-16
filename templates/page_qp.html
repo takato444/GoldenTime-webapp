@@ -103,7 +103,7 @@
                         </div>
                         <div class="icon_bar">
                             <div class="icon_bar__item icon_bar__home">
-                                <a href="#0">
+                                <a href="/">
                                     <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="512.000000pt" height="429.000000pt" viewbox="0 0 512.000000 429.000000" preserveaspectratio="xMidYMid meet" class="fn__svg  replaced-svg">
                                         <g transform="translate(0.000000,429.000000) scale(0.100000,-0.100000)" stroke="none">
                                             <path d="M1335 3349 c-671 -517 -1246 -960 -1277 -984 l-58 -45 177 -229 177 -230 35 28 c20 16 516 398 1104 849 l1067 821 1068 -821 c587 -451 1083 -833 1103 -849 l35 -28 176 229 176 228 -21 20 c-12 10 -176 137 -364 282 l-343 262 0 464 0 464 -367 -2 -368 -3 -3 -172 c-1 -95 -5 -173 -8 -173 -3 0 -248 187 -544 415 -297 228 -541 415 -542 414 -2 0 -552 -423 -1223 -940z"></path>
@@ -112,22 +112,9 @@
                                     </svg>
                                 </a>
                             </div>
-                            <div class="icon_bar__item icon_bar__share">
-                                <a href="#1" target="_blank">
-                                    <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="512.000000pt" height="512.000000pt" viewbox="0 0 512.000000 512.000000" preserveaspectratio="xMidYMid meet" class="fn__svg replaced-svg">
-                                        <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" stroke="none">
-                                            <path d="M1218 5109 c-167 -20 -364 -85 -514 -170 -388 -223 -644 -611 -693 -1052 -15 -133 -15 -2521 0 -2654 71 -643 579 -1151 1222 -1222 133 -15 2521 -15 2654 0 643 71 1151 579 1222 1222 15 133 15 2521 0 2654 -71 643 -579 1151 -1222 1222 -118 13 -2554 13 -2669 0z m2892 -671 c150 -45 265 -177 290 -334 30 -185 -83 -378 -261 -445 -152 -58 -333 -17 -443 101 -231 247 -88 646 249 693 40 5 121 -2 165 -15z m-1366 -493 c309 -41 577 -174 802 -399 550 -550 550 -1422 0 -1972 -550 -550 -1422 -550 -1972 0 -550 550 -550 1422 0 1972 315 314 734 457 1170 399z">
-                                            </path>
-                                            <path d="M3965 4153 c-32 -8 -74 -54 -81 -89 -8 -46 19 -98 63 -119 46 -22 91 -13 128 25 45 47 36 130 -18 164 -27 17 -65 25 -92 19z">
-                                            </path>
-                                            <path d="M2394 3645 c-233 -36 -441 -142 -609 -310 -431 -430 -431 -1120 0 -1550 430 -431 1120 -431 1550 0 431 430 431 1120 0 1550 -249 249 -597 364 -941 310z">
-                                            </path>
-                                        </g>
-                                    </svg>
-                                </a>
-                            </div>
-                            <div class="icon_bar__item icon_bar__search">
-                                <a href="#">
+
+                            <div class="icon_bar__item icon_bar__search" >
+                                <a href="#" onclick="showFoodSearch()" class="search_link">
                                     <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="488.000000pt" height="488.000000pt" viewbox="0 0 488.000000 488.000000" preserveaspectratio="xMidYMid meet" class="fn__svg  replaced-svg">
                                         <g transform="translate(0.000000,488.000000) scale(0.100000,-0.100000)" stroke="none">
                                             <path d="M2140 4874 c-165 -20 -218 -28 -303 -45 -263 -54 -570 -183 -792 -332 -179 -121 -378 -299 -510 -457 -271 -326 -444 -714 -511 -1150 -22 -142 -25 -488 -6 -630 92 -667 461 -1257 1019 -1631 538 -362 1205 -477 1842 -318 181 45 304 92 501 191 163 82 179 88 235 88 103 -1 126 -17 395 -284 216 -214 253 -246 310 -271 57 -26 77 -30 160 -30 86 0 101 3 162 32 89 42 151 101 191 182 30 62 32 72 32 176 0 104 -2 114 -33 180 -29 61 -60 96 -267 305 -258 259 -274 282 -275 385 0 56 6 72 88 235 99 197 146 320 191 501 174 699 17 1434 -427 1994 -78 98 -241 264 -347 353 -312 262 -725 447 -1137 508 -99 14 -446 27 -518 18z m476 -823 c401 -82 743 -312 970 -651 360 -540 333 -1254 -66 -1769 -306 -393 -781 -612 -1274 -587 -700 35 -1268 524 -1418 1220 -18 85 -22 133 -21 296 0 170 3 210 25 310 63 286 195 534 397 744 251 259 562 412 941 460 85 11 348 -3 446 -23z">
@@ -143,61 +130,62 @@
         </div>
     </div>
     <!--================= Sticky Menu End Here =================-->
+    <script>
+        function showImageSearch() {
+           document.getElementById("imageSearchBox").style.display = "block";
+           document.getElementById("foodSearchBox").style.display = "none";
+       }
 
-    <div class="xoxo_fn_searchbox">
-        <a href="#" class="search_closer"><span></span></a>
-        <div class="container">
-            <div class="search_content">
-                <div class="search_wrapper">
-                    <form id="search-form" class="main_form" action="." method="post">
-                        <div class="input">
-                            {% comment %} 輸入收尋得值 {% endcomment %}
-                            <input id="search-input" type="text" placeholder="今天想來點什麼..." name="searchname" autocomplete="off">
-                        </div>
-                        <div class="search">
-                            <input type="submit" class="pe-7s-search" value="今天想點">
-                            <a href="/search/" class="pe-7s-search"></a>
-    
-                              <script>
-                              document.querySelector(".pe-7s-search").addEventListener("click", function(event) {
-                                  event.preventDefault();  // 防止點擊連結的預設行為
-                                  var searchQuery = "";  // 填入你的搜尋關鍵字
-                                  window.location.href = "/search/" + encodeURIComponent(searchQuery);
-                                  form.method = "post";
-                                  form.submit();
-                              });
-                              </script>
-    
-                            <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="488.000000pt" height="488.000000pt" viewbox="0 0 488.000000 488.000000" preserveaspectratio="xMidYMid meet" class="fn__svg  replaced-svg">
-                                <g transform="translate(0.000000,488.000000) scale(0.100000,-0.100000)" stroke="none">
-                                    <path d="M2140 4874 c-165 -20 -218 -28 -303 -45 -263 -54 -570 -183 -792 -332 -179 -121 -378 -299 -510 -457 -271 -326 -444 -714 -511 -1150 -22 -142 -25 -488 -6 -630 92 -667 461 -1257 1019 -1631 538 -362 1205 -477 1842 -318 181 45 304 92 501 191 163 82 179 88 235 88 103 -1 126 -17 395 -284 216 -214 253 -246 310 -271 57 -26 77 -30 160 -30 86 0 101 3 162 32 89 42 151 101 191 182 30 62 32 72 32 176 0 104 -2 114 -33 180 -29 61 -60 96 -267 305 -258 259 -274 282 -275 385 0 56 6 72 88 235 99 197 146 320 191 501 174 699 17 1434 -427 1994 -78 98 -241 264 -347 353 -312 262 -725 447 -1137 508 -99 14 -446 27 -518 18z m476 -823 c401 -82 743 -312 970 -651 360 -540 333 -1254 -66 -1769 -306 -393 -781 -612 -1274 -587 -700 35 -1268 524 -1418 1220 -18 85 -22 133 -21 296 0 170 3 210 25 310 63 286 195 534 397 744 251 259 562 412 941 460 85 11 348 -3 446 -23z">
-                                    </path>
-                                </g>
-                            </svg>
-                        </div>
-                    </form>
-                    <!-- <div id="search-results"></div> -->
-                </div>
-              </div>
-        </div>
+       function showFoodSearch() {
+           document.getElementById("foodSearchBox").style.display = "block";
+           document.getElementById("imageSearchBox").style.display = "none";
+       }
+   </script>
+   <div class="xoxo_fn_searchbox" id="imageSearchBox">
+    <a href="$" class="search_closer" ><span></span></a>
+    <div class="container">
+        <div class="search_content">
+            <div class="search_wrapper">
+                <h4>選擇要上傳的圖片</h4>
+                <input type="file" id="imageInput" accept="image/jpeg,image/jpg,image/png"><br>
+                <input type="submit" onclick="uploadImage()" value="上傳圖片">
+                <img id="uploadedImage" style="display: none; max-width: 300px;">
+                <script>
+                    function uploadImage() {
+                        // 上傳圖片的相關操作
+                    }
+                </script>
+            </div>
+          </div>
     </div>
-    <div class="xoxo_fn_searchbox">
-        <a href="#1" class="search_closer"><span></span></a>
-        <div class="container">
-            <div class="search_content">
-                <div class="search_wrapper">
-                    <input type="file" id="imageInput" accept="image/*">
-                    <button onclick="uploadImage()">上傳圖片</button>
-                    <img id="uploadedImage" style="display: none; max-width: 300px;">
-                    <script>
-                        function uploadImage() {
-                            
-                        }
-                      </script>
-                </div>
-              </div>
-        </div>
-    </div>
+</div>
+   <div class="xoxo_fn_searchbox" id="foodSearchBox">
+       <a href="#" class="search_closer"><span></span></a>
+       <div class="container">
+           <div class="search_content">
+               <div class="search_wrapper">
+                   <form id="search-form" class="main_form" action="." method="post">
+                       <div class="input">
+                           {% comment %} 輸入收尋得值 {% endcomment %}
+                           <input id="search-input" type="text" placeholder="今天想來點什麼..." name="searchname" autocomplete="off">
+                       </div>
+                       <div class="search">
+                           <input type="submit" class="pe-7s-search" value="今天想點">
+                           <a href="/search/" class="pe-7s-search"></a>
+                           <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="488.000000pt" height="488.000000pt" viewbox="0 0 488.000000 488.000000" preserveaspectratio="xMidYMid meet" class="fn__svg  replaced-svg">
+                               <g transform="translate(0.000000,488.000000) scale(0.100000,-0.100000)" stroke="none">
+                                   <path d="M2140 4874 c-165 -20 -218 -28 -303 -45 -263 -54 -570 -183 -792 -332 -179 -121 -378 -299 -510 -457 -271 -326 -444 -714 -511 -1150 -22 -142 -25 -488 -6 -630 92 -667 461 -1257 1019 -1631 538 -362 1205 -477 1842 -318 181 45 304 92 501 191 163 82 179 88 235 88 103 -1 126 -17 395 -284 216 -214 253 -246 310 -271 57 -26 77 -30 160 -30 86 0 101 3 162 32 89 42 151 101 191 182 30 62 32 72 32 176 0 104 -2 114 -33 180 -29 61 -60 96 -267 305 -258 259 -274 282 -275 385 0 56 6 72 88 235 99 197 146 320 191 501 174 699 17 1434 -427 1994 -78 98 -241 264 -347 353 -312 262 -725 447 -1137 508 -99 14 -446 27 -518 18z m476 -823 c401 -82 743 -312 970 -651 360 -540 333 -1254 -66 -1769 -306 -393 -781 -612 -1274 -587 -700 35 -1268 524 -1418 1220 -18 85 -22 133 -21 296 0 170 3 210 25 310 63 286 195 534 397 744 251 259 562 412 941 460 85 11 348 -3 446 -23z">
+                                   </path>
+                               </g>
+                           </svg>
+                       </div>
+                   </form>
+                   <!-- <div id="search-results"></div> -->
+               </div>
+             </div>
+       </div>
+   </div>
+   
     <!--================= Header Start Here =================-->
     <header id="xoxo_fn_header">
         <div class="xoxo_fn_header">
@@ -206,8 +194,8 @@
                     <span class="wing_left"></span>
                     <span class="wing_right"></span>
                     <!-- Social List -->
-                    <div class="search_opener">
-                        <a href="#" target="_blank">
+                    <div class="search_opener" >
+                        <a href="#"  onclick="showImageSearch()" class="search_link">
                             <span class="text">圖片搜尋</span>
                             <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="512.000000pt" height="512.000000pt" viewbox="0 0 512.000000 512.000000" preserveaspectratio="xMidYMid meet" class="fn__svg replaced-svg">
                                 <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" stroke="none">
@@ -220,7 +208,6 @@
                                 </g>
                             </svg>
                         </a>
-                        </a>
                     </div>
                     <!-- !Social List -->
                     <div class="logo">
@@ -229,8 +216,8 @@
                             <img class="desktop_logo" src="../static/picture/logo.png" alt="logo">
                         </a>
                     </div>
-                    <div class="search_opener">
-                        <a href="#">
+                    <div class="search_opener" >
+                        <a href="#" onclick="showFoodSearch()" class="search_link">
                             <span class="text">尋找美食</span>
                             <span class="icon">
 							<svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="488.000000pt" height="488.000000pt" viewbox="0 0 488.000000 488.000000" preserveaspectratio="xMidYMid meet" class="fn__svg  replaced-svg">
