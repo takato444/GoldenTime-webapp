@@ -4,6 +4,7 @@
 {% block content %}
     <!-- photo.html 的內容 -->
     <!-- 放只有這頁才有的內容 -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA5Py2oaRlbR6MMsXhM6oGLmqlbCWeWrUE&libraries=places"></script>
     <div class="xoxo_fn_nosidebar">
         <div class="container blog_layout_classic_container">
             <div class="xoxo_fn_bloglist blog_layout_classic">
@@ -22,7 +23,11 @@
                                             <textarea placeholder="想一個美味的標題吧！" name="fdname" aria-required="true" rows="1" tabindex="1"></textarea>
                                             <br>
                                             <textarea placeholder="留下你的心得吧！" name="context" aria-required="true" rows="10" tabindex="1"></textarea>
-                                        </div>
+                                        </div><br>
+                                        <label for="address">地址：</label>
+                                        <input type="text" id="address" name="address">
+                                        <button type="button" onclick="showMap()">顯示地圖</button><br>
+                                        <div id="map" style="height: 400px;"></div><br><br>
                                         <br>
                                         <div class="input-holder">
                                             <span class="xoxo_submit">
@@ -38,4 +43,26 @@
             </div>
         </div>
     </div>
+    <script>
+        let map;
+        function showMap() {
+            const geocoder = new google.maps.Geocoder();
+            const address = document.getElementById('address').value;
+            geocoder.geocode({ 'address': address }, function(results, status) {
+                if (status === 'OK') {
+                    const location = results[0].geometry.location;
+                    map = new google.maps.Map(document.getElementById('map'), {
+                        center: location,
+                        zoom: 15
+                    });
+                    new google.maps.Marker({
+                        map: map,
+                        position: location
+                    });
+                } else {
+                    alert('地圖無法顯示，請輸入有效地址！');
+                }
+            });
+        }
+    </script>
 {% endblock %}
