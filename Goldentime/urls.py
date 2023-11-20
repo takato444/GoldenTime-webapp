@@ -45,4 +45,6 @@ urlpatterns = [
     path('joinlove/<str:food_no>',views.joinlove),
     path('comment/<str:food_no>',views.comment),
     path('kill/<str:food_no>',views.kill),
+    path('image_search',views.image_search),
+    path('into_image_search',views.into_image_search),
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

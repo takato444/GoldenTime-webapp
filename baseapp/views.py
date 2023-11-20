@@ -18,33 +18,46 @@ def admin(request):
 	return redirect('/admin/')
 def adminpage(request):
     return redirect('admin＿page.html')
-def into_index(request):                          #抓推薦食物跟熱門食物
-	data = food.objects.all().order_by('food_no')
+def into_index(request):                          
+	data = food.objects.all().order_by('hit') #抓推薦食物跟熱門食物
+	rank = food.objects.all().order_by('hit')[:3]
 	if request.user.is_authenticated:
 		name=request.user.username
 	return render(request,'main.html',locals())
+def into_image_search(request):
+	return render(request,'photo-text.html',locals())
 def image_search(request):
-	pass
+	if request.method =='POST':
+		img  = food.objects.values('food_no','food_img')
+		searchTarget = request.POST['search_img']
+		searchH=pHash(searchTarget)
+		result = []
+		for x,i in img.food_no,img.food_img:
+			dataH = pHash(i)
+			HD = Hamming_distance(searchH,dataH)
+			if HD <40:
+				result.append(x)
+	return render(request,'search.html',locals())
+	
 def pHash(imgfile): #phash演算法
 	"""get image pHash value"""
 	img=cv2.imread(imgfile, cv2.CV_LOAD_IMAGE_GRAYSCALE)
 	img=cv2.resize(img,(32,32),interpolation=cv2.INTER_CUBIC)
-
 	h, w = img.shape[:2]
 	vis0 = np.zeros((h,w), np.float32)
 	vis0[:h,:w] = img      
-
 	vis1 = cv2.dct(cv2.dct(vis0))
-
 	vis1.resize(8,8)
-
 	img_list=flat_gen(vis1.tolist()) 
- 
-
 	avg = sum(img_list)*1./len(img_list)
 	avg_list = ['0' if i<avg else '1' for i in img_list]
-
 	return ''.join(['%x' % int(''.join(avg_list[x:x+4]),2) for x in range(0,64,4)])
+def Hamming_distance(hash1,hash2): 
+    num = 0
+    for index in range(len(hash1)):
+        if hash1[index] != hash2[index]:
+            num += 1
+    return num 
 def flat_gen(x): #flatten
     def iselement(e):
         return not(isinstance(e, collections.Iterable) and not isinstance(e, str))
@@ -125,7 +138,7 @@ def comment(request,food_no):
 def name_search(request):
 	if request.method == 'POST':
 		searchname = request.POST['searchname']
-		data = food.objects.filter(food_name=searchname)
+		data = food.objects.filter(food_name__icontains=searchname)
 	return render(request,'search.html',locals())
 def search(request,searchname):
 	data = food.objects.filter(tag=searchname)
@@ -298,6 +311,11 @@ def quote_post(request,food_no):
 	user = basedata.objects.filter(food__food_no=food_no)
 	# comment = mesg.objects.all().order_by('username')
 	comment = mesg.objects.filter(food_no=food_no)
+	# unit = food.object.get(food_no = food_no)
+	hit = data[0].hit
+	hit = hit +1 
+	data.update(hit = hit)
+	# data.save()
 	return render(request,'quote-post.html',locals())
 def joinlove(request,food_no):
 	if request.user.is_authenticated:
