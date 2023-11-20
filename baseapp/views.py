@@ -135,12 +135,12 @@ def comment(request,food_no):
 		unit = mesg.objects.create(username=username,food_no=food_no,context=comment)
 		unit.save()
 	return redirect('/quote_post/'+temp)
-def name_search(request):
+def name_search(request): #用名稱找
 	if request.method == 'POST':
 		searchname = request.POST['searchname']
 		data = food.objects.filter(food_name__icontains=searchname)
 	return render(request,'search.html',locals())
-def search(request,searchname):
+def search(request,searchname):#用tag找
 	data = food.objects.filter(tag=searchname)
 	return render(request,'search.html',locals())
 def into_search(request):
