@@ -24,18 +24,33 @@
                                             <br>
                                             <textarea placeholder="留下你的心得吧！" name="context" aria-required="true" rows="10" tabindex="1"></textarea>
                                             <br>
-                                            <textarea placeholder="相關tag" name="tag" aria-required="true" rows="1" tabindex="1"></textarea>
+                                            <label for="htag">這份美食的分類</label>
+                                            <select name="tag" id="htag">
+                                                <option value="麵包">麵包</option>
+                                                <option value="乳製品">乳製品</option>
+                                                <option value="甜點">甜點</option>
+                                                <option value="蛋類">蛋類</option>
+                                                <option value="炸物">炸物</option>
+                                                <option value="肉類">肉類</option>
+                                                <option value="麵類">麵類</option>
+                                                <option value="飯類">飯類</option>
+                                                <option value="海鮮">海鮮</option>
+                                                <option value="湯品">湯品</option>
+                                                <option value="蔬菜">蔬菜</option>
+                                                </select>
                                         </div><br>
-                                        <label for="address">地址：</label>
-                                        <input type="text" id="address" name="address">
-                                        <button type="button" onclick="showMap()">顯示地圖</button><br>
-                                        <div id="map" style="height: 400px;"></div><br><br>
+                                        <div class="input">
+                                            <input type="text" id="address" name="address" placeholder="輸入這份美食的位置" autocomplete="off">
+                                            <input type="button" onclick="showMap()" value="顯示地圖"></button><br>
+                                            <div id="map" style="height: 400px;"></div><br>
+                                        </div>
                                         <br>
                                         <div class="input-holder">
                                             <span class="xoxo_submit">
                                                 <input name="submit" type="submit" class="submit" value="分享">
                                             </span>
                                         </div>
+                                        
                                     </form>
                                 </div>
                             </div>
