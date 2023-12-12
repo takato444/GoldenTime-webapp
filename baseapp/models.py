@@ -16,11 +16,12 @@ class food(models.Model):
     food_no = models.AutoField(primary_key=True,null= False)
     food_name = models.CharField(max_length=100, null = False)
     food_img = models.ImageField(upload_to='image/', blank=False, null=False)
-    context = models.CharField(max_length=1000000,default="沒有內文喔！")
+    context = models.CharField(max_length=225,default="沒有內文喔！")
     adr = models.CharField(max_length=225,default=" ")
     username=models.ForeignKey("basedata",on_delete=models.CASCADE)
     tag = models.CharField(max_length=20,null=False,default="0")
     upload_date = models.DateField(default=timezone.now)
+    food_hash = models.CharField(max_length=64,default='0')
     hit = models.IntegerField(default=0)
 class mesg(models.Model):
     mes_no = models.AutoField(primary_key = True)

@@ -3,14 +3,17 @@ from django.contrib.auth import authenticate
 from django.http import HttpResponse
 from django.contrib import auth
 from django.contrib.auth.models import User
-from baseapp.models import basedata,food,mesg,love
+from Goldentime.settings import BASE_DIR
+from baseapp.models import basedata,food,mesg,love,search
 from tensorflow.keras.models import load_model
+from django.db.models import Count
 from pyimagesearch import config
 import output
 import numpy as np
 import imutils
 import cv2
 import sys
+import os
 import collections
 # from compiler.ast import flatten
 # from .forms import foodform
@@ -19,48 +22,73 @@ def admin(request):
 def adminpage(request):
     return redirect('admin＿page.html')
 def into_index(request):                          
-	data = food.objects.all().order_by('hit') #抓推薦食物跟熱門食物
-	rank = food.objects.all().order_by('hit')[:3]
+	data = food.objects.all().order_by('hit')[:10] #抓推薦食物跟熱門食物
+	rank = search.objects.values('context').annotate(context_count=Count('context')).order_by('-context_count')[:3]
+	print(rank)
 	if request.user.is_authenticated:
 		name=request.user.username
 	return render(request,'main.html',locals())
 def into_image_search(request):
 	return render(request,'photo-text.html',locals())
 def image_search(request):
-	if request.method =='POST':
-		img  = food.objects.values('food_no','food_img')
-		searchTarget = request.POST['search_img']
-		searchH=pHash(searchTarget)
-		result = []
-		for x,i in img.food_no,img.food_img:
-			dataH = pHash(i)
-			HD = Hamming_distance(searchH,dataH)
-			if HD <40:
-				result.append(x)
-	return render(request,'search.html',locals())
-	
-def pHash(imgfile): #phash演算法
-	"""get image pHash value"""
-	img=cv2.imread(imgfile, cv2.CV_LOAD_IMAGE_GRAYSCALE)
-	img=cv2.resize(img,(32,32),interpolation=cv2.INTER_CUBIC)
-	h, w = img.shape[:2]
-	vis0 = np.zeros((h,w), np.float32)
-	vis0[:h,:w] = img      
-	vis1 = cv2.dct(cv2.dct(vis0))
-	vis1.resize(8,8)
-	img_list=flat_gen(vis1.tolist()) 
-	avg = sum(img_list)*1./len(img_list)
-	avg_list = ['0' if i<avg else '1' for i in img_list]
-	return ''.join(['%x' % int(''.join(avg_list[x:x+4]),2) for x in range(0,64,4)])
-def Hamming_distance(hash1,hash2): 
-    num = 0
-    for index in range(len(hash1)):
-        if hash1[index] != hash2[index]:
-            num += 1
-    return num 
-def flat_gen(x): #flatten
+    if request.method == 'POST':
+        search_target = request.FILES.get('search_img')
+        search_hash = pHash(search_target)
+
+        # 抓全部食物
+        all_food_objects = food.objects.all()
+
+        # 使用找漢民距離小於20
+        result = [food_obj for food_obj in all_food_objects if Hamming_distance(search_hash, food_obj.food_hash) <= 2]
+        return render(request, 'search.html', {'data': result})
+
+
+def pHash(imgfile):
+    try:
+        media_url = '/media/'  # 請根據你的設置修改這個值
+
+        # 如果 imgfile 是字符串，直接使用；否則，從 InMemoryUploadedFile 中提取數據
+        if isinstance(imgfile, str):
+            full_path = os.path.join(BASE_DIR, 'media', imgfile.lstrip('/'))
+        else:
+            # 如果是 InMemoryUploadedFile 對象，從中提取數據
+            filename = imgfile.name
+            full_path = os.path.join(BASE_DIR, 'media', filename)
+
+            with open(full_path, 'wb') as destination:
+                for chunk in imgfile.chunks():
+                    destination.write(chunk)
+
+        if not os.path.exists(full_path):
+            raise ValueError(f"Image file '{full_path}' does not exist.")
+
+        img = cv2.imread(full_path, cv2.IMREAD_GRAYSCALE)
+
+        # ... 繼續執行 pHash 的其餘部分 ...
+        
+        h, w = img.shape[:2]
+        vis0 = np.zeros((h, w), np.float32)
+        vis0[:h, :w] = img
+        vis1 = cv2.dct(cv2.dct(vis0))
+        vis1.resize(8, 8)
+        img_list = list(flat_gen(vis1.tolist()))
+        avg = sum(img_list) * 1. / len(img_list)
+        avg_list = ['0' if i < avg else '1' for i in img_list]
+        return ''.join(['%x' % int(''.join(avg_list[x:x+4]), 2) for x in range(0, 64, 4)])
+    except Exception as e:
+        print(f"Error in pHash: {e}")
+        return ""  # 或者根據你的需求返回其他值
+
+
+
+
+def Hamming_distance(hash1, hash2):
+    return sum(bit1 != bit2 for bit1, bit2 in zip(hash1, hash2))
+
+def flat_gen(x):
     def iselement(e):
-        return not(isinstance(e, collections.Iterable) and not isinstance(e, str))
+        return not (isinstance(e, collections.Iterable) and not isinstance(e, str))
+
     for el in x:
         if iselement(el):
             yield el
@@ -69,60 +97,36 @@ def flat_gen(x): #flatten
 def into_sign(request):
     pass
 def into_upload(request):
-	if request.user.is_authenticated:
-	# return render(request,'photo.html',locals())
-		if request.method =='POST':
-			context = request.POST['context']
-			food_name = request.POST['fdname']
-			# username = request.user.username
-			username = basedata.objects.get(username=request.user.username)
-			# username=request.user.username
-			adr = request.POST['adr']
-			unit = food.objects.create(food_name=food_name,username=username,adr=adr,context=context)
-			_,food_img = request.FILES.popitem()
-			food_img = food_img[0]
-			unit.food_img = food_img 
-			unit.save()
-			image = cv2.imread(unit.food_img.path)
-			image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-			image = cv2.resize(image, (224, 224))
-			image = image.astype("float32")
-			mean = np.array([123.68, 116.779, 103.939][::1], dtype="float32")
-			image -= mean
-			model = load_model(config.MODEL_PATH)
-			preds = model.predict(np.expand_dims(image, axis=0))[0]
-			i = np.argmax(preds)
-			label = config.CLASSES[i]
-			if label == "Bread":
-				label = "麵包"
-			elif label == "Dairy product":
-				label ="乳製品"
-			elif label =="Dessert":
-				label = "甜點"
-			elif label =="Egg":
-				label="蛋類"
-			elif label == "Fried food":
-				label = "炸物"
-			elif label=="Meat":
-				label="肉類"
-			elif label =="Noodles/Pasta":
-				label="麵類"
-			elif label =="Rice":
-				label = "飯類"
-			elif label=="Seafood":
-				label = "海鮮"
-			elif label=="Soup":
-				label = "湯品"
-			elif label=="Vegetable/Fruit":
-				label="蔬菜"
-			# 麵包、乳製品、甜點、蛋類、炸物、肉類、麵類、飯類、海鮮、湯品、蔬菜
-			# Bread,Dairy product,Dessert,Egg,Fried food,Meat,Noodles,Rice,Seafood,Soup,Vegetable
-			unit.tag=label
-			unit.save()
-			return redirect('/mypost/')
-		return render(request,'photo.html',locals())
-	else:
-		return redirect('/login/')
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            context = request.POST['context']
+            food_name = request.POST['fdname']
+            username = basedata.objects.get(username=request.user.username)
+            adr = request.POST['address']
+            tag = request.POST['tag']
+
+            _, food_img = request.FILES.popitem()
+            food_img = food_img[0]
+
+            # 計算 pHash
+            hash_value = pHash(food_img)
+
+            # 創建 food 對象，保存相關信息
+            unit = food.objects.create(
+                food_name=food_name,
+                username=username,
+                adr=adr,
+                context=context,
+                tag=tag,
+                food_img=food_img,
+                food_hash=hash_value  # 將 pHash 值保存用於優化搜尋
+            )
+
+            return redirect('/mypost/')
+
+        return render(request, 'photo.html', locals())
+    else:
+        return redirect('/login/')
 def comment(request,food_no):
 	if request.method == "POST":
 		temp=food_no
@@ -140,7 +144,12 @@ def name_search(request): #用名稱找
 		searchname = request.POST['searchname']
 		data = food.objects.filter(food_name__icontains=searchname)
 	return render(request,'search.html',locals())
-def search(request,searchname):#用tag找
+def tag_search(request,searchname):#用tag找
+	if request.user.is_authenticated:
+		username = basedata.objects.get(username=request.user.username)
+	else:
+		username = 'test'
+	unit = search.objects.create(username=username,context=searchname)
 	data = food.objects.filter(tag=searchname)
 	return render(request,'search.html',locals())
 def into_search(request):

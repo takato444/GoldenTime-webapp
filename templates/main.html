@@ -3,6 +3,7 @@
 
 {% block content %}
     <!-- main.html 的內容 -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA5Py2oaRlbR6MMsXhM6oGLmqlbCWeWrUE&libraries=places"></script>
     <!--================= Home One Start =================-->
     <div class="xoxo_fn_content">
         <!--================= Slider Area Start Here =================-->
@@ -79,7 +80,7 @@
                                                 </g>
                                             </svg>
                                         </span>
-                                    <span class="text">熱門美食</span>
+                                    <span class="text">熱門搜尋</span>
                                     <span class="icon__after">
                                             <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="512.000000pt" height="512.000000pt" viewbox="0 0 512.000000 512.000000" preserveaspectratio="xMidYMid meet" class="fn__svg  replaced-svg">
                                                 <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" stroke="none">
@@ -92,30 +93,30 @@
                                 </h3>
                             </div>
                             <div class="fp_content">
-                                <ul>
-                                    <li>
-                                        <div class="fp__item">
-                                            <span class="fp_count"><span>01</span></span>
-                                            <h4>#<a href="#0">甜點</a></h4>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="fp__item">
-                                            <span class="fp_count"><span>02</span></span>
-                                            <h4>#<a href="#0">麵包</a></h4>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="fp__item"><span class="fp_count"><span>03</span></span>
-                                            <h4>#<a href="#0">炸物</a></h4>
-                                        </div>
-                                    </li>
-                                </ul>
-                                
-                            </div>
+                              <ul>
+                                  {% for rank_item in rank %}
+                                  <li>
+                                      <div class="fp__item">
+                                          <span class="fp_count"><span>{{ forloop.counter0|add:"1"|stringformat:"02d" }}</span></span>
+                                          <h4>#<a href="/search/{{ rank_item.context }}">{{ rank_item.context }}</a></h4>
+                                      </div>
+                                  </li>
+                                  {% endfor %}
+                              </ul>
+                          </div>                          
                         </div>
                     <br>
                 </div>
+                <br>
+              <h4>選擇附近貼文範圍</h4>
+              <select id="rangeSelect" onchange="searchWithinRange(this.value)">
+                <option value="1">一公里內</option>
+                <option value="2">兩公里內</option>
+                <option value="3">三公里內</option>
+                <option value="4">四公里內</option>
+                <option value="5">五公里內</option>
+              </select>
+              <!-- 這裡會顯示附近的貼文 -->
                 <ul class="post_list">
                     {% for data in data %}
                     <li class="post_item">

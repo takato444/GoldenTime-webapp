@@ -28,7 +28,7 @@ urlpatterns = [
     path('upload/',views.into_upload),
     path('login/',views.login),
     path('mypost/',views.into_mypost),
-    path('search/<str:searchname>',views.search),
+    path('search/<str:searchname>',views.tag_search),
     path('mylove/',views.into_mylove),
     path('myinfo/',views.myinfo),
     path('mysetting/',views.mysetting),

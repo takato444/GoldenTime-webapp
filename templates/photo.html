@@ -18,7 +18,7 @@
                                         <h2>Hi！美食探勘家</h2><br>
                                         <h4>選擇你要上傳的美食：</h4>
                                         <input type="file" id="file-input" name="fdimg" accept=".jpg, .jpeg, .png">
-                                        <br><br>
+                                        <img id="image-preview" src="#" alt="Image preview"><br><br>
                                         <div class="input-holder">
                                             <textarea placeholder="想一個美味的標題吧！" name="fdname" aria-required="true" rows="1" tabindex="1"></textarea>
                                             <br>
@@ -62,24 +62,55 @@
     </div>
     <script>
         let map;
-        function showMap() {
+    
+        // Function to get user's current location
+        function getUserLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    function(position) {
+                        const userLocation = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude
+                        };
+                        setDefaultAddress(userLocation);
+                    },
+                    function(error) {
+                        console.error('Error getting user location:', error);
+                    }
+                );
+            } else {
+                alert('瀏覽器不支援地理位置功能');
+            }
+        }
+    
+        // Function to set default address based on user's location
+        function setDefaultAddress(location) {
             const geocoder = new google.maps.Geocoder();
-            const address = document.getElementById('address').value;
-            geocoder.geocode({ 'address': address }, function(results, status) {
+            geocoder.geocode({ 'location': location }, function(results, status) {
                 if (status === 'OK') {
-                    const location = results[0].geometry.location;
-                    map = new google.maps.Map(document.getElementById('map'), {
-                        center: location,
-                        zoom: 15
-                    });
-                    new google.maps.Marker({
-                        map: map,
-                        position: location
-                    });
+                    const formattedAddress = results[0].formatted_address;
+                    document.getElementById('address').value = formattedAddress;
+                    showMap(location);
                 } else {
-                    alert('地圖無法顯示，請輸入有效地址！');
+                    alert('無法獲得地址信息');
                 }
             });
         }
+    
+        // Function to show map based on location
+        function showMap(location) {
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: location,
+                zoom: 15
+            });
+            new google.maps.Marker({
+                map: map,
+                position: location
+            });
+        }
+    
+        // Call the getUserLocation function to set default address
+        getUserLocation();
     </script>
+    
 {% endblock %}
